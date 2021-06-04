@@ -6,6 +6,10 @@
 	"files": [
 		"lib/**/*"
 	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/TimothyGillespie/JavascriptGraph.git"
+	},
 	"scripts": {
 		"build": "npm run build:linux",
 		"build:linux": "rm -rf ./lib && tsc",
