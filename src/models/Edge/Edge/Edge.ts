@@ -23,4 +23,12 @@ abstract class Edge<V extends Vertex> {
 	abstract isDirected(): boolean;
 }
 
+export function edgeEqual<V extends Vertex, E extends Edge<V>>(a: E, b: E) {
+	return a.equals(b);
+}
+
+export function edgeCompareTo<V extends Vertex, E extends Edge<V>>(a: E, b: E) {
+	return a.compareTo(b);
+}
+
 export default Edge;
