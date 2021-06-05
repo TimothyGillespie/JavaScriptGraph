@@ -27,7 +27,7 @@ export function edgeEqual<V extends Vertex, E extends Edge<V>>(a: E, b: E) {
 	return a.equals(b);
 }
 
-export function edgeCompareTo<V extends Vertex, E extends Edge<V>>(a: E, b: E) {
+export function edgeCompareTo<V extends Vertex, E extends Edge<V>>(a: E, b: E): number {
 	return a.compareTo(b);
 }
 
