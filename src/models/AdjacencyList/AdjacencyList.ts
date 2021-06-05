@@ -11,8 +11,8 @@ class AdjacencyList<V extends Vertex> {
 		this.data.set(vertex, []);
 	}
 
-	isAdjacent(from: V, to: V): boolean {
-		return this.getAdjacentVertices(from).find((singleVertex) => singleVertex.compareTo(to)) !== undefined;
+	areAdjacent(from: V, to: V): boolean {
+		return this.getAdjacentVertices(from).find((singleVertex) => singleVertex.equals(to)) !== undefined;
 	}
 
 	getAdjacentVertices(from: V): V[] {
@@ -20,7 +20,7 @@ class AdjacencyList<V extends Vertex> {
 	}
 
 	addAdjacency(from: V, to: V) {
-		if (this.isAdjacent(from, to)) return;
+		if (this.areAdjacent(from, to)) return;
 
 		this.getAdjacentVertices(from).push(to);
 	}
