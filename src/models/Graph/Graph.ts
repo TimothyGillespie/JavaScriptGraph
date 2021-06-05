@@ -26,7 +26,8 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 	}
 
 	addVertex(...vertex: V[]): Graph<V, E> {
-		const filteredVertices = _.differenceWith(vertex, this._listOfVertices, vertexEqual);
+		const uniqueVertices = _.uniqWith(vertex, vertexEqual);
+		const filteredVertices = _.differenceWith(uniqueVertices, this._listOfVertices, vertexEqual);
 		filteredVertices.forEach((singleVertex) => {
 			this._listOfVertices.push(singleVertex);
 			this._adjacencyList.initVertex(singleVertex);
@@ -36,7 +37,8 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 	}
 
 	addEdge(...edge: E[]): Graph<V, E> {
-		const filteredEdges = _.differenceWith(edge, this._listOfEdges, edgeEqual);
+		const uniqueEdges = _.uniqWith(edge, edgeEqual);
+		const filteredEdges = _.differenceWith(uniqueEdges, this._listOfEdges, edgeEqual);
 
 		if (!this.addsUnknownVerticesInEdges())
 			filteredEdges.forEach((singleEdge) => this.validateEdgeVerticesAreContainedInGraph(singleEdge));
