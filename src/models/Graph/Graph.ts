@@ -1,7 +1,9 @@
 import Vertex, { vertexEqual } from '../Vertex/Vertex/Vertex';
-import Edge from '../Edge/Edge/Edge';
+import Edge, { edgeEqual } from '../Edge/Edge/Edge';
 import * as _ from 'lodash';
 import AdjacencyMatrix from '../Matrix/AdjacencyMatrix';
+import VertexNotFoundError from '../../Errors/VertexNotFoundError';
+import AdjacencyList from '../AdjacencyList/AdjacencyList';
 
 class Graph<V extends Vertex, E extends Edge<V>> {
 	// Redundant information storage for performance
@@ -10,20 +12,46 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 
 	protected _adjacencyMatrix: AdjacencyMatrix<V>;
 
-	protected _adjacencyList: Map<V, V[]>;
+	protected _adjacencyList: AdjacencyList<V>;
 
-	constructor() {
+	protected _addUnknownVerticesInEdges: boolean;
+
+	constructor(addUnknownVerticesInEdges: boolean = false) {
 		this._listOfEdges = [];
 		this._listOfVertices = [];
 		this._adjacencyMatrix = new AdjacencyMatrix<V>();
-		this._adjacencyList = new Map();
+		this._adjacencyList = new AdjacencyList<V>();
+
+		this._addUnknownVerticesInEdges = addUnknownVerticesInEdges;
 	}
 
 	addVertex(...vertex: V[]): Graph<V, E> {
 		const filteredVertices = _.differenceWith(vertex, this._listOfVertices, vertexEqual);
 		filteredVertices.forEach((singleVertex) => {
 			this._listOfVertices.push(singleVertex);
-			this._adjacencyList.set(singleVertex, []);
+			this._adjacencyList.initVertex(singleVertex);
+		});
+
+		return this;
+	}
+
+	addEdge(...edge: E[]): Graph<V, E> {
+		const filteredEdges = _.differenceWith(edge, this._listOfEdges, edgeEqual);
+
+		if (!this.addsUnknownVerticesInEdges())
+			filteredEdges.forEach((singleEdge) => this.validateEdgeVerticesAreContainedInGraph(singleEdge));
+		else filteredEdges.forEach((singleEdge) => this.addVertex(singleEdge.vertexA, singleEdge.vertexB));
+
+		filteredEdges.forEach((singleEdge) => {
+			this._listOfEdges.push(singleEdge);
+
+			this._adjacencyMatrix.set(singleEdge.vertexA, singleEdge.vertexB, true);
+			this._adjacencyList.addAdjacency(singleEdge.vertexA, singleEdge.vertexB);
+
+			if (!singleEdge.isDirected()) {
+				this._adjacencyMatrix.set(singleEdge.vertexB, singleEdge.vertexA, true);
+				this._adjacencyList.addAdjacency(singleEdge.vertexB, singleEdge.vertexA);
+			}
 		});
 
 		return this;
@@ -41,8 +69,25 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 		return _.cloneDeep(this._adjacencyMatrix);
 	}
 
-	getAdjacencyList(): Map<V, V[]> {
+	getAdjacencyList(): AdjacencyList<V> {
 		return _.cloneDeep(this._adjacencyList);
+	}
+
+	addsUnknownVerticesInEdges(): boolean {
+		return this._addUnknownVerticesInEdges;
+	}
+
+	validateEdgeVerticesAreContainedInGraph(edge: E) {
+		this.validateVertexIsContainedInGraph(edge.vertexA);
+		this.validateVertexIsContainedInGraph(edge.vertexB);
+	}
+
+	validateVertexIsContainedInGraph(vertex: V) {
+		if (!this.isVertexContainedInGraph(vertex)) throw new VertexNotFoundError(vertex);
+	}
+
+	isVertexContainedInGraph(vertex: V): boolean {
+		return this._listOfVertices.find((singleVertex) => singleVertex.equals(vertex)) !== undefined;
 	}
 }
 
