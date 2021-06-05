@@ -2,6 +2,7 @@ import Graph from '../Graph';
 import NamedVertex from '../../Vertex/NamedVertex/NamedVertex';
 import DirectedEdge from '../../Edge/DirectedEdge/DirectedEdge';
 import expectVerticesListsAreEqual from '../../../../testUtil/expectVerticesListsAreEqual';
+import Vertex from '../../Vertex/Vertex/Vertex';
 
 let graph: Graph<NamedVertex, DirectedEdge<NamedVertex>>;
 let a: NamedVertex;
@@ -33,8 +34,8 @@ describe('g.addVertex()', () => {
 
 	describe('Edge Cases', () => {
 		it('Adding the same vertex twice does not add the vertex twice in the list', () => {
-			graph.addVertex(a);
-			graph.addVertex(a);
+			const secondA = new NamedVertex('a');
+			graph.addVertex(a, secondA);
 
 			expect(graph.getListOfVertices()).toEqual([a]);
 		});
