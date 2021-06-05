@@ -27,7 +27,7 @@ describe('g.addVertex()', () => {
 
 		it('Adding a vertex add it to the adjacency list', () => {
 			graph.addVertex(a);
-			expect(graph.getAdjacencyList().get(a)).toEqual([]);
+			expect(graph.getAdjacencyList().getAdjacentVertices(a)).toEqual([]);
 		});
 	});
 
