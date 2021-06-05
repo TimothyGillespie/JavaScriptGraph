@@ -19,12 +19,14 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 		this._adjacencyList = new Map();
 	}
 
-	addVertex(...vertex: V[]) {
+	addVertex(...vertex: V[]): Graph<V, E> {
 		const filteredVertices = _.differenceWith(vertex, this._listOfVertices, vertexEqual);
 		filteredVertices.forEach((singleVertex) => {
 			this._listOfVertices.push(singleVertex);
 			this._adjacencyList.set(singleVertex, []);
 		});
+
+		return this;
 	}
 
 	getListOfEdges(): E[] {
