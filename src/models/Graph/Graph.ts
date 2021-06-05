@@ -52,7 +52,6 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 
 			if (!singleEdge.isDirected()) {
 				this._adjacencyMatrix.set(singleEdge.vertexB, singleEdge.vertexA, true);
-				this._adjacencyList.addAdjacency(singleEdge.vertexB, singleEdge.vertexA);
 			}
 		});
 

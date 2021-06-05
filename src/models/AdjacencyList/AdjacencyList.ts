@@ -1,28 +1,28 @@
 import Vertex from '../Vertex/Vertex/Vertex';
 
 class AdjacencyList<V extends Vertex> {
-	protected data: Map<V, V[]>;
+	protected _adjacencyList: Map<V, V[]>;
 
 	constructor() {
-		this.data = new Map();
+		this._adjacencyList = new Map();
 	}
 
 	initVertex(vertex: V) {
-		this.data.set(vertex, []);
+		this._adjacencyList.set(vertex, []);
 	}
 
-	areAdjacent(from: V, to: V): boolean {
+	protected _areAdjacent(from: V, to: V): boolean {
 		return this.getAdjacentVertices(from).find((singleVertex) => singleVertex.equals(to)) !== undefined;
 	}
 
-	getAdjacentVertices(from: V): V[] {
-		return this.data.get(from) ?? [];
+	getAdjacentVertices(vertex: V): V[] {
+		return this._adjacencyList.get(vertex) ?? [];
 	}
 
-	addAdjacency(from: V, to: V) {
-		if (this.areAdjacent(from, to)) return;
-
-		this.getAdjacentVertices(from).push(to);
+	addAdjacency(vertexA: V, vertexB: V) {
+		if (this._areAdjacent(vertexA, vertexB)) return;
+		this.getAdjacentVertices(vertexA).push(vertexB);
+		this.getAdjacentVertices(vertexB).push(vertexA);
 	}
 }
 
