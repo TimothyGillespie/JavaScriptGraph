@@ -67,16 +67,16 @@ describe('g.addEdge()', () => {
 			edge1 = new DirectedEdge(a, b);
 			graph.addEdge(edge1);
 
-			expect(graph.getAdjacencyList().areAdjacent(a, b)).toBe(true);
-			expect(graph.getAdjacencyList().areAdjacent(b, a)).toBe(false);
+			expect(graph.getAdjacencyList().getAdjacentVertices(a)).toEqual([b]);
+			expect(graph.getAdjacencyList().getAdjacentVertices(b)).toEqual([a]);
 		});
 
 		it('Adding an undirected Edge update the adjacency list accordingly', () => {
 			edge1 = new UndirectedEdge(a, b);
 			graph.addEdge(edge1);
 
-			expect(graph.getAdjacencyList().areAdjacent(a, b)).toBe(true);
-			expect(graph.getAdjacencyList().areAdjacent(b, a)).toBe(true);
+			expect(graph.getAdjacencyList().getAdjacentVertices(a)).toEqual([b]);
+			expect(graph.getAdjacencyList().getAdjacentVertices(b)).toEqual([a]);
 		});
 	});
 
