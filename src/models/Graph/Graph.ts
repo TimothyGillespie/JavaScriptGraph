@@ -143,16 +143,26 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 			stack.push(currentVertex);
 
 			let takenEdge = null;
+			let previousVertex = null;
 
 			while (![...visited.values()].every(_.identity)) {
 				currentVertex = stack.pop();
 				if (currentVertex === undefined) {
-					console.log('here');
+					takenEdge = null;
+					previousVertex = null;
 					for (const maybeUnvisited of this.getListOfVertices())
 						if (!visited.get(JSON.stringify(maybeUnvisited))) {
 							currentVertex = maybeUnvisited;
 							break;
 						}
+				} else {
+					if (previousVertex !== null) {
+						const possibleEdges = this.getEdges(previousVertex, currentVertex);
+						if (possibleEdges.length === 0) takenEdge = null;
+						else takenEdge = possibleEdges[0];
+					} else {
+						takenEdge = null;
+					}
 				}
 
 				if (currentVertex === undefined) break;
@@ -163,8 +173,9 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 					adjacentVertices.sort(orderFunction);
 					adjacentVertices.reverse();
 
-					yield { currentVertex, visited, takenEdge, graph: this };
+					yield { currentVertex, previousVertex, visited, takenEdge, graph: this };
 
+					previousVertex = currentVertex;
 					stack.push(...adjacentVertices);
 				}
 			}
@@ -212,6 +223,7 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 export interface graphIterationCallbackParameter<V extends Vertex, E extends Edge<V>, G extends Graph<V, E>> {
 	graph: Readonly<G>;
 	currentVertex: Readonly<V>;
+	previousVertex: Readonly<V | null>;
 	// ToDo: replace with own map too
 	visited: Readonly<Map<string, boolean>>;
 	takenEdge: Readonly<E | null>;

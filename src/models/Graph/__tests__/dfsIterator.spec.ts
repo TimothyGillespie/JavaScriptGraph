@@ -48,5 +48,20 @@ describe('g.*dfsIterator()', () => {
 
 			expect(actualOrderOfIteration).toEqual([a, c, b, e, d]);
 		});
+
+		it('Returns last taken edge correctly', () => {
+			const edge1 = new DirectedEdge(a, c);
+			const edge2 = new DirectedEdge(c, b);
+			const edge3 = new DirectedEdge(e, c);
+			graph.addEdge(edge1, edge2, edge3);
+
+			const actualOrderOfIteration = [];
+			const iterator = graph.dfsIterator();
+			for (const iteration of iterator) {
+				actualOrderOfIteration.push(iteration.takenEdge);
+			}
+
+			expect(actualOrderOfIteration).toEqual([null, edge1, edge2, null, null]);
+		});
 	});
 });

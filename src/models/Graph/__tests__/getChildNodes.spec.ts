@@ -21,7 +21,6 @@ describe('g.getChildNodes(v)', () => {
 		c = new NamedVertex('c');
 		d = new NamedVertex('d');
 		e = new NamedVertex('e');
-		graph.addVertex(a, b, c, d, e);
 	});
 
 	describe('Normal Cases', () => {
