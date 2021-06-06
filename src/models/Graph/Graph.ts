@@ -95,26 +95,14 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 		);
 	}
 
-	// dfsForEach(
-	// 	cb: (info: graphIterationCallbackParameter<V, E, this>) => void,
-	// 	startVertex: Vertex | undefined = undefined,
-	// 	orderFunction: (a: V, b: V, more?: graphIterationCallbackParameter<V, E, this>) => number = vertexCompareTo,
-	// ) {
-	// 	const graphCopy = this.copy();
-	// 	const takenEdge = null;
-	//
-	// 	let firstVertex: V | undefined;
-	//
-	// 	if (startVertex === undefined) {
-	// 		const listOfNodes = this.getListOfVertices();
-	// 		if (listOfNodes.length === 0) firstVertex = undefined;
-	// 		else listOfNodes.sort(orderFunction)[0];
-	// 	} else {
-	// 		firstVertex = startVertex;
-	// 	}
-	//
-	// 	//...
-	// }
+	dfsForEach(
+		cb: (info: graphIterationCallbackParameter<V, E, this>) => void,
+		startVertex: Vertex | undefined = undefined,
+		orderFunction: (a: V, b: V, more?: graphIterationCallbackParameter<V, E, this>) => number = vertexCompareTo,
+	) {
+		const payload = {};
+		for (const dfsIteration of this.dfsIterator()) cb({ ...dfsIteration, payload });
+	}
 
 	*dfsIterator(
 		startVertex: V | undefined = undefined,
