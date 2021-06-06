@@ -24,12 +24,14 @@ describe('g.dfsForEach(cb, v, f)', () => {
 		it('Can use and alter the payload', () => {
 			let expectedCounter = 1;
 
-			graph.dfsForEach(({ payload }) => {
-				const currentNumber = payload.counter ?? 0;
-				payload.counter = currentNumber + 1;
-				expect(expectedCounter).toEqual(payload.counter);
-				expectedCounter++;
-			});
+			graph.dfsForEach<{ counter: number }>(
+				({ payload }) => {
+					expect(expectedCounter).toEqual(payload.counter);
+					payload.counter = payload.counter + 1;
+					expectedCounter++;
+				},
+				{ counter: 1 },
+			);
 		});
 	});
 });

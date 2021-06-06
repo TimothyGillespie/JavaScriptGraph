@@ -95,19 +95,24 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 		);
 	}
 
-	dfsForEach(
-		cb: (info: graphIterationCallbackParameter<V, E, this>) => void,
+	dfsForEach<T>(
+		cb: (info: graphIterationCallbackParameter<V, E, this, T>) => void,
+		initialPayload: T,
 		startVertex: Vertex | undefined = undefined,
-		orderFunction: (a: V, b: V, more?: graphIterationCallbackParameter<V, E, this>) => number = vertexCompareTo,
+		orderFunction: (a: V, b: V, more?: graphIterationCallbackParameter<V, E, this, T>) => number = vertexCompareTo,
 	) {
-		const payload = {};
+		const payload: T = initialPayload;
 		for (const dfsIteration of this.dfsIterator()) cb({ ...dfsIteration, payload });
 	}
 
 	*dfsIterator(
 		startVertex: V | undefined = undefined,
-		orderFunction: (a: V, b: V, more?: graphIterationCallbackParameter<V, E, this>) => number = vertexCompareTo,
-	): Generator<Omit<graphIterationCallbackParameter<V, E, this>, 'payload'>, void, unknown> {
+		orderFunction: (
+			a: V,
+			b: V,
+			more?: graphIterationCallbackParameter<V, E, this, any>,
+		) => number = vertexCompareTo,
+	): Generator<Omit<graphIterationCallbackParameter<V, E, this, any>, 'payload'>, void, unknown> {
 		// ToDo: replace with own map too
 		const visited: Map<string, boolean> = new Map();
 		for (const singleVertexInGraph of this.getListOfVertices())
@@ -208,14 +213,14 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 	}
 }
 
-export interface graphIterationCallbackParameter<V extends Vertex, E extends Edge<V>, G extends Graph<V, E>> {
+export interface graphIterationCallbackParameter<V extends Vertex, E extends Edge<V>, G extends Graph<V, E>, T> {
 	graph: Readonly<G>;
 	currentVertex: Readonly<V>;
 	previousVertex: Readonly<V | null>;
 	// ToDo: replace with own map too
 	visited: Readonly<Map<string, boolean>>;
 	takenEdge: Readonly<E | null>;
-	payload: any;
+	payload: T;
 }
 
 export default Graph;
