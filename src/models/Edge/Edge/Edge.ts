@@ -9,6 +9,12 @@ abstract class Edge<V extends Vertex> {
 		this.vertexB = vertexB;
 	}
 
+	transpose(): void {
+		const temp = this.vertexA;
+		this.vertexA = this.vertexB;
+		this.vertexB = temp;
+	}
+
 	equals(other: Edge<V>): boolean {
 		return this.vertexA.equals(other.vertexA) && this.vertexB.equals(other.vertexB);
 	}
