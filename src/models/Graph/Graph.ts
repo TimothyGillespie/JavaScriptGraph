@@ -116,42 +116,60 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 	// 	//...
 	// }
 
-	// *dfsIterator(
-	// 	startVertex: V | undefined,
-	// 	orderFunction: (a: V, b: V, more?: graphIterationCallbackParameter<V, E, this>) => number = vertexCompareTo,
-	// ): Generator<Omit<graphIterationCallbackParameter<V, E, this>, 'payload'>, void, unknown> {
-	// 	const visited: Map<V, boolean> = new Map();
-	// 	for (const singleVertexInGraph of this.getListOfVertices()) visited.set(singleVertexInGraph, false);
-	//
-	// 	let currentVertex: V | undefined;
-	//
-	// 	if (startVertex === undefined) {
-	// 		const listOfNodes = this.getListOfVertices();
-	// 		if (listOfNodes.length === 0) currentVertex = undefined;
-	// 		else {
-	// 			listOfNodes.sort(orderFunction);
-	// 			currentVertex = listOfNodes[0];
-	// 		}
-	// 	} else {
-	// 		currentVertex = startVertex;
-	// 	}
-	//
-	// 	const stack: V[] = [];
-	//
-	// 	if (currentVertex !== undefined) {
-	// 		stack.push(currentVertex);
-	//
-	// 		visited.set(currentVertex, true);
-	// 		let takenEdge = null;
-	//
-	// 		while (stack.length !== 0) {
-	// 			currentVertex = stack.pop()!;
-	// 			if (!visited.get(currentVertex)) {
-	// 				visited.set(currentVertex, true);
-	// 			}
-	// 		}
-	// 	}
-	// }
+	*dfsIterator(
+		startVertex: V | undefined = undefined,
+		orderFunction: (a: V, b: V, more?: graphIterationCallbackParameter<V, E, this>) => number = vertexCompareTo,
+	): Generator<Omit<graphIterationCallbackParameter<V, E, this>, 'payload'>, void, unknown> {
+		// ToDo: replace with own map too
+		const visited: Map<string, boolean> = new Map();
+		for (const singleVertexInGraph of this.getListOfVertices())
+			visited.set(JSON.stringify(singleVertexInGraph), false);
+		let currentVertex: V | undefined;
+
+		if (startVertex === undefined) {
+			const listOfNodes = this.getListOfVertices();
+			if (listOfNodes.length === 0) currentVertex = undefined;
+			else {
+				listOfNodes.sort(orderFunction);
+				currentVertex = listOfNodes[0];
+			}
+		} else {
+			currentVertex = startVertex;
+		}
+
+		const stack: V[] = [];
+
+		if (currentVertex !== undefined) {
+			stack.push(currentVertex);
+
+			let takenEdge = null;
+
+			while (![...visited.values()].every(_.identity)) {
+				currentVertex = stack.pop();
+				if (currentVertex === undefined) {
+					console.log('here');
+					for (const maybeUnvisited of this.getListOfVertices())
+						if (!visited.get(JSON.stringify(maybeUnvisited))) {
+							currentVertex = maybeUnvisited;
+							break;
+						}
+				}
+
+				if (currentVertex === undefined) break;
+
+				if (!visited.get(JSON.stringify(currentVertex))) {
+					visited.set(JSON.stringify(currentVertex), true);
+					const adjacentVertices = this.getChildNodes(currentVertex);
+					adjacentVertices.sort(orderFunction);
+					adjacentVertices.reverse();
+
+					yield { currentVertex, visited, takenEdge, graph: this };
+
+					stack.push(...adjacentVertices);
+				}
+			}
+		}
+	}
 
 	copy(): this {
 		return _.cloneDeep(this);
@@ -194,7 +212,8 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 export interface graphIterationCallbackParameter<V extends Vertex, E extends Edge<V>, G extends Graph<V, E>> {
 	graph: Readonly<G>;
 	currentVertex: Readonly<V>;
-	visited: Readonly<Map<V, boolean>>;
+	// ToDo: replace with own map too
+	visited: Readonly<Map<string, boolean>>;
 	takenEdge: Readonly<E | null>;
 	payload: any;
 }
