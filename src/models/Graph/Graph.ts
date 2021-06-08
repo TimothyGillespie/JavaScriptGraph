@@ -183,6 +183,23 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 		}
 	}
 
+	getSubgraph(vertices: V[]): Graph<V, E> {
+		vertices.forEach((singleVertex) => this.validateVertexIsContainedInGraph(singleVertex));
+
+		const subgraph = new Graph<V, E>();
+		subgraph.addVertex(...vertices);
+
+		this.getListOfEdges().forEach((singleEdge) => {
+			if (
+				subgraph.isVertexContainedInGraph(singleEdge.vertexA) &&
+				subgraph.isVertexContainedInGraph(singleEdge.vertexB)
+			)
+				subgraph.addEdge(singleEdge);
+		});
+
+		return subgraph;
+	}
+
 	copy(): this {
 		return _.cloneDeep(this);
 	}

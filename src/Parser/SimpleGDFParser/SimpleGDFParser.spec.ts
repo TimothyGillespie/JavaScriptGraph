@@ -3,11 +3,11 @@ import petersonGraph from '../../assets/FamousGraphs/PetersonGraph.gdf';
 import Graph from '../../models/Graph/Graph';
 import NamedVertex from '../../models/Vertex/NamedVertex/NamedVertex';
 import expectVerticesListsAreEqual from '../../../testUtil/expectVerticesListsAreEqual';
-import Edge from '../../models/Edge/Edge/Edge';
 import DirectedEdge from '../../models/Edge/DirectedEdge/DirectedEdge';
 import expectEdgeListsAreEqual from '../../../testUtil/expectEdgeListsAreEqual';
+import { generateDirectedEdgesWithNameVertex } from '../../../testUtil/generationFromSimplerDatastructure';
 
-let g: Graph<any, any>;
+let g: Graph<NamedVertex, DirectedEdge<NamedVertex>>;
 
 describe('SimpleGDFParser', () => {
 	it('Loads peterson graph', () => {
@@ -45,9 +45,7 @@ describe('SimpleGDFParser', () => {
 			['i', 'f'],
 		];
 
-		const listOfEdges = edgePairs.map(
-			([vertexA, vertexB]) => new DirectedEdge(new NamedVertex(vertexA), new NamedVertex(vertexB)),
-		);
+		const listOfEdges = generateDirectedEdgesWithNameVertex(edgePairs);
 		expectEdgeListsAreEqual(g.getListOfEdges(), listOfEdges);
 	});
 });
