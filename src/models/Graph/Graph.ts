@@ -4,6 +4,7 @@ import * as _ from 'lodash';
 import AdjacencyMatrix from '../Matrix/AdjacencyMatrix';
 import VertexNotFoundError from '../../Errors/VertexNotFoundError';
 import AdjacencyList from '../AdjacencyList/AdjacencyList';
+import TarjanStronglyConnectedComponentsAlgorithm from './algorithms/TarjanStronglyConnectedComponentsAlgorithm';
 
 class Graph<V extends Vertex, E extends Edge<V>> {
 	// Redundant information storage for performance
@@ -62,7 +63,7 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 		return this.getAdjacencyList().getAdjacentVertices(vertex);
 	}
 
-	getChildNodes(vertex: V): V[] {
+	getChildVertices(vertex: V): V[] {
 		const allEdges = this.getListOfEdges();
 		const allVertices = this.getListOfVertices();
 		let result: V[] = [];
@@ -170,7 +171,7 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 
 				if (!visited.get(JSON.stringify(currentVertex))) {
 					visited.set(JSON.stringify(currentVertex), true);
-					const adjacentVertices = this.getChildNodes(currentVertex);
+					const adjacentVertices = this.getChildVertices(currentVertex);
 					adjacentVertices.sort(orderFunction);
 					adjacentVertices.reverse();
 
@@ -198,6 +199,10 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 		});
 
 		return subgraph;
+	}
+
+	getStronglyConnectedComponents(): V[][] {
+		return TarjanStronglyConnectedComponentsAlgorithm.getStronglyConnectedComponentFor(this);
 	}
 
 	copy(): this {
