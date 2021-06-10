@@ -107,7 +107,7 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 	dfsForEach<T>(
 		cb: (info: GraphIterationCallbackParameter<V, E, this, T>) => void,
 		initialPayload: T,
-		startVertex: Vertex | undefined = undefined,
+		startVertex?: Vertex,
 		orderFunction: (a: V, b: V, more?: GraphIterationCallbackParameter<V, E, this, T>) => number = vertexCompareTo,
 	) {
 		const payload: T = initialPayload;
@@ -115,7 +115,7 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 	}
 
 	*dfsIterator(
-		startVertex: V | undefined = undefined,
+		startVertex?: V,
 		orderFunction: (
 			a: V,
 			b: V,
