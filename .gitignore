@@ -1,3 +1,7 @@
 .idea
 node_modules
 /lib
+# stryker temp files
+.stryker-tmp
+reports
+coverage

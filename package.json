@@ -15,6 +15,7 @@
 		"build:linux": "rm -rf ./lib && tsc",
 		"build:windows": "rd ./lib && tsc",
 		"test": "jest",
+		"mutation-test": "stryker run",
 		"format": "prettier --write \"src/**/*.ts\" \"./*.json\" \"./.prettierrc\"",
 		"lint": "tslint -p tsconfig.json",
 		"prepare": "npm run build",
@@ -26,6 +27,8 @@
 	"author": "Timothy Gillespie",
 	"license": "GPL-3.0",
 	"devDependencies": {
+		"@stryker-mutator/core": "^5.4.0",
+		"@stryker-mutator/jest-runner": "^5.4.0",
 		"@types/jest": "^26.0.23",
 		"jest": "^27.0.4",
 		"prettier": "^2.3.0",
