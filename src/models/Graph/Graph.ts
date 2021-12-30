@@ -5,6 +5,7 @@ import AdjacencyMatrix from '../Matrix/AdjacencyMatrix';
 import VertexNotFoundError from '../../Errors/VertexNotFoundError';
 import AdjacencyList from '../AdjacencyList/AdjacencyList';
 import TarjanStronglyConnectedComponentsAlgorithm from './algorithms/TarjanStronglyConnectedComponentsAlgorithm';
+import {MutableHashMap} from "@tgillespie/hash-data-structures";
 
 class Graph<V extends Vertex, E extends Edge<V>> {
 	// Redundant information storage for performance
@@ -107,11 +108,11 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 	dfsForEach<T>(
 		cb: (info: GraphIterationCallbackParameter<V, E, this, T>) => void,
 		initialPayload: T,
-		startVertex?: Vertex,
+		startVertex?: V,
 		orderFunction: (a: V, b: V, more?: GraphIterationCallbackParameter<V, E, this, T>) => number = vertexCompareTo,
 	) {
 		const payload: T = initialPayload;
-		for (const dfsIteration of this.dfsIterator()) cb({ ...dfsIteration, payload });
+		for (const dfsIteration of this.dfsIterator(startVertex, orderFunction)) cb({ ...dfsIteration, payload });
 	}
 
 	*dfsIterator(
@@ -122,10 +123,9 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 			more?: GraphIterationCallbackParameter<V, E, this, any>,
 		) => number = vertexCompareTo,
 	): Generator<Omit<GraphIterationCallbackParameter<V, E, this, any>, 'payload'>, void, unknown> {
-		// ToDo: replace with own map too
-		const visited: Map<string, boolean> = new Map();
+		const visited: MutableHashMap<V, boolean> = new MutableHashMap();
 		for (const singleVertexInGraph of this.getListOfVertices())
-			visited.set(JSON.stringify(singleVertexInGraph), false);
+			visited.set(singleVertexInGraph, false);
 		let currentVertex: V | undefined;
 
 		if (startVertex === undefined) {
@@ -153,7 +153,7 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 					takenEdge = null;
 					previousVertex = null;
 					for (const maybeUnvisited of this.getListOfVertices())
-						if (!visited.get(JSON.stringify(maybeUnvisited))) {
+						if (!visited.get(maybeUnvisited)) {
 							currentVertex = maybeUnvisited;
 							break;
 						}
@@ -169,8 +169,8 @@ class Graph<V extends Vertex, E extends Edge<V>> {
 
 				if (currentVertex === undefined) break;
 
-				if (!visited.get(JSON.stringify(currentVertex))) {
-					visited.set(JSON.stringify(currentVertex), true);
+				if (!visited.get(currentVertex)) {
+					visited.set(currentVertex, true);
 					const adjacentVertices = this.getChildVertices(currentVertex);
 					adjacentVertices.sort(orderFunction);
 					adjacentVertices.reverse();
@@ -247,8 +247,7 @@ export interface GraphIterationCallbackParameter<V extends Vertex, E extends Edg
 	graph: Readonly<G>;
 	currentVertex: Readonly<V>;
 	previousVertex: Readonly<V | null>;
-	// ToDo: replace with own map too
-	visited: Readonly<Map<string, boolean>>;
+	visited: Readonly<MutableHashMap<V, boolean>>;
 	takenEdge: Readonly<E | null>;
 	payload: T;
 }

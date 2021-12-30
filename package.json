@@ -18,8 +18,7 @@
 		"mutation-test": "stryker run",
 		"format": "prettier --write \"src/**/*.ts\" \"./*.json\" \"./.prettierrc\"",
 		"lint": "tslint -p tsconfig.json",
-		"prepare": "npm run build",
-		"prepublishOnly": "npm test && npm run lint",
+		"prepublishOnly": "npm run build && npm test && npm run lint",
 		"preversion": "npm run test && npm run lint",
 		"version": "npm run format && git add -A src",
 		"postversion": "git push && git push --tags"
@@ -52,7 +51,7 @@
 		]
 	},
 	"dependencies": {
-		"@tgillespie/hash-data-structures": "^1.0.2",
+		"@tgillespie/hash-data-structures": "^1.1.0",
 		"@types/lodash": "^4.14.170",
 		"lodash": "^4.17.21"
 	}

@@ -1,16 +1,26 @@
 import Edge from '../Edge/Edge';
 import Vertex from '../../Vertex/Vertex/Vertex';
+import {Hashable} from "@tgillespie/hash-data-structures";
 
 class UndirectedEdge<V extends Vertex> extends Edge<V> {
 	isDirected(): boolean {
 		return false;
 	}
 
-	equals(other: Edge<V>): boolean {
-		if (other.isDirected()) return false;
+	equals(other: Hashable): boolean {
+		if(!(other instanceof UndirectedEdge)) return false;
+        if (other.isDirected()) return false;
 
-		return super.equals(other) || (this.vertexA.equals(other.vertexB) && this.vertexB.equals(other.vertexA));
+        return (
+            this.vertexA.equals(other.vertexA) && this.vertexB.equals(other.vertexB)
+            || this.vertexA.equals(other.vertexB) && this.vertexB.equals(other.vertexA)
+        );
 	}
+
+    hashCode(): number {
+        // tslint:disable-next-line:no-bitwise
+        return (this.vertexA.hashCode() << 16) + (this.vertexB.hashCode() << 16);
+    }
 }
 
 export default UndirectedEdge;
