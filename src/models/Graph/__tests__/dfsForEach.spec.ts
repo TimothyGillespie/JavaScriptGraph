@@ -1,6 +1,6 @@
-import {Graph} from '../Graph';
-import {NamedVertex} from '../../Vertex/NamedVertex/NamedVertex';
-import {Edge} from '../../Edge/Edge/Edge';
+import { Graph } from '../Graph';
+import { NamedVertex } from '../../Vertex/NamedVertex/NamedVertex';
+import { Edge } from '../../Edge/Edge/Edge';
 
 let graph: Graph<NamedVertex, Edge<NamedVertex>>;
 

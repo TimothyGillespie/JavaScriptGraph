@@ -1,4 +1,4 @@
-import {Vertex} from '../models/Vertex/Vertex/Vertex';
+import { Vertex } from '../models/Vertex/Vertex/Vertex';
 
 export class VertexNotFoundError extends Error {
 	constructor(vertex: Vertex) {

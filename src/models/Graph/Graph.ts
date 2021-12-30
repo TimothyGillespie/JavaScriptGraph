@@ -1,11 +1,11 @@
-import {Vertex, vertexCompareTo, vertexEqual } from '../Vertex/Vertex/Vertex';
-import {Edge, edgeEqual } from '../Edge/Edge/Edge';
+import { Vertex, vertexCompareTo, vertexEqual } from '../Vertex/Vertex/Vertex';
+import { Edge, edgeEqual } from '../Edge/Edge/Edge';
 import * as _ from 'lodash';
-import {AdjacencyMatrix} from '../Matrix/AdjacencyMatrix';
-import {VertexNotFoundError} from '../../Errors/VertexNotFoundError';
-import {AdjacencyList} from '../AdjacencyList/AdjacencyList';
-import {TarjanStronglyConnectedComponentsAlgorithm} from './algorithms/TarjanStronglyConnectedComponentsAlgorithm';
-import {MutableHashMap} from "@tgillespie/hash-data-structures";
+import { AdjacencyMatrix } from '../Matrix/AdjacencyMatrix';
+import { VertexNotFoundError } from '../../Errors/VertexNotFoundError';
+import { AdjacencyList } from '../AdjacencyList/AdjacencyList';
+import { TarjanStronglyConnectedComponentsAlgorithm } from './algorithms/TarjanStronglyConnectedComponentsAlgorithm';
+import { MutableHashMap } from '@tgillespie/hash-data-structures';
 
 export class Graph<V extends Vertex, E extends Edge<V>> {
 	// Redundant information storage for performance
@@ -124,8 +124,7 @@ export class Graph<V extends Vertex, E extends Edge<V>> {
 		) => number = vertexCompareTo,
 	): Generator<Omit<GraphIterationCallbackParameter<V, E, this, any>, 'payload'>, void, unknown> {
 		const visited: MutableHashMap<V, boolean> = new MutableHashMap();
-		for (const singleVertexInGraph of this.getListOfVertices())
-			visited.set(singleVertexInGraph, false);
+		for (const singleVertexInGraph of this.getListOfVertices()) visited.set(singleVertexInGraph, false);
 		let currentVertex: V | undefined;
 
 		if (startVertex === undefined) {

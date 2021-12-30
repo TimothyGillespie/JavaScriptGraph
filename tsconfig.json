@@ -5,8 +5,8 @@
 		"declaration": true,
 		"outDir": "./lib",
 		"strict": false,
-        "downlevelIteration": true,
-    },
-    "include": ["src"],
+		"downlevelIteration": true
+	},
+	"include": ["src"],
 	"exclude": ["node_modules", "**/__tests__/*", "**/*.spec.ts", "**/*.spec.js"]
 }

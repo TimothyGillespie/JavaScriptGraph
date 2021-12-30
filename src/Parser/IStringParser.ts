@@ -1,4 +1,4 @@
-import {Graph} from '../models/Graph/Graph';
+import { Graph } from '../models/Graph/Graph';
 
 export interface IStringParser<G extends Graph<any, any>> {
 	/**

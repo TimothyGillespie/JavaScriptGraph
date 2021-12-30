@@ -1,9 +1,9 @@
-import {Graph} from '../Graph';
-import {NamedVertex} from '../../Vertex/NamedVertex/NamedVertex';
-import {DirectedEdge} from '../../Edge/DirectedEdge/DirectedEdge';
-import {UndirectedEdge} from '../../Edge/UndirectedEdge/UndirectedEdge';
-import {Edge} from '../../Edge/Edge/Edge';
-import {expectVerticesListsAreEqual} from '../../../../testUtil/expectVerticesListsAreEqual';
+import { Graph } from '../Graph';
+import { NamedVertex } from '../../Vertex/NamedVertex/NamedVertex';
+import { DirectedEdge } from '../../Edge/DirectedEdge/DirectedEdge';
+import { UndirectedEdge } from '../../Edge/UndirectedEdge/UndirectedEdge';
+import { Edge } from '../../Edge/Edge/Edge';
+import { expectVerticesListsAreEqual } from '../../../../testUtil/expectVerticesListsAreEqual';
 import * as _ from 'lodash';
 
 let graph: Graph<NamedVertex, Edge<NamedVertex>>;

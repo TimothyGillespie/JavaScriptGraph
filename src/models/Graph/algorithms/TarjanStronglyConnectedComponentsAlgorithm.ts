@@ -1,6 +1,6 @@
-import {Graph} from '../Graph';
-import {Vertex} from '../../Vertex/Vertex/Vertex';
-import {MutableHashMap} from "@tgillespie/hash-data-structures";
+import { Graph } from '../Graph';
+import { Vertex } from '../../Vertex/Vertex/Vertex';
+import { MutableHashMap } from '@tgillespie/hash-data-structures';
 
 export class TarjanStronglyConnectedComponentsAlgorithm<V extends Vertex> {
 	private constructor(graph: Graph<V, any>) {
@@ -43,18 +43,12 @@ export class TarjanStronglyConnectedComponentsAlgorithm<V extends Vertex> {
 				this.dfsUtil(childVertex);
 				this.lowMap.set(
 					currentVertex,
-					Math.min(
-						this.lowMap.get(currentVertex) ?? -1,
-						this.lowMap.get(childVertex) ?? -1,
-					),
+					Math.min(this.lowMap.get(currentVertex) ?? -1, this.lowMap.get(childVertex) ?? -1),
 				);
 			} else if (this.stack.find((stackVertex) => stackVertex.equals(childVertex)) !== undefined) {
 				this.lowMap.set(
 					currentVertex,
-					Math.min(
-						this.lowMap.get(currentVertex) ?? -1,
-						this.discMap.get(childVertex) ?? -1,
-					),
+					Math.min(this.lowMap.get(currentVertex) ?? -1, this.discMap.get(childVertex) ?? -1),
 				);
 			}
 		});

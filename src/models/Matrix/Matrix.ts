@@ -1,4 +1,4 @@
-import {Hashable, MutableHashMap} from "@tgillespie/hash-data-structures";
+import { Hashable, MutableHashMap } from '@tgillespie/hash-data-structures';
 
 export abstract class Matrix<RowType extends Hashable, ColumnType extends Hashable, ValueType> {
 	defaultValue: ValueType;

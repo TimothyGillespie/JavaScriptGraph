@@ -1,6 +1,6 @@
-import {Vertex} from '../Vertex/Vertex/Vertex';
-import {Matrix} from './Matrix';
-import {Edge} from '../Edge/Edge/Edge';
+import { Vertex } from '../Vertex/Vertex/Vertex';
+import { Matrix } from './Matrix';
+import { Edge } from '../Edge/Edge/Edge';
 
 export class AdjacencyMatrix<V extends Vertex> extends Matrix<V, V, boolean> {
 	constructor() {

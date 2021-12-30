@@ -1,5 +1,5 @@
-import {Vertex} from '../Vertex/Vertex';
-import {stringToHashCode} from "@tgillespie/hash-data-structures";
+import { Vertex } from '../Vertex/Vertex';
+import { stringToHashCode } from '@tgillespie/hash-data-structures';
 
 export class NamedVertex extends Vertex {
 	name: string;
@@ -17,7 +17,7 @@ export class NamedVertex extends Vertex {
 		return other instanceof NamedVertex && this.name === other.name;
 	}
 
-    hashCode(): number {
-        return stringToHashCode(this.name);
-    }
+	hashCode(): number {
+		return stringToHashCode(this.name);
+	}
 }

@@ -1,7 +1,7 @@
-import {Graph} from '../Graph';
-import {NamedVertex} from '../../Vertex/NamedVertex/NamedVertex';
-import {DirectedEdge} from '../../Edge/DirectedEdge/DirectedEdge';
-import {expectVerticesListsAreEqual} from '../../../../testUtil/expectVerticesListsAreEqual';
+import { Graph } from '../Graph';
+import { NamedVertex } from '../../Vertex/NamedVertex/NamedVertex';
+import { DirectedEdge } from '../../Edge/DirectedEdge/DirectedEdge';
+import { expectVerticesListsAreEqual } from '../../../../testUtil/expectVerticesListsAreEqual';
 
 let graph: Graph<NamedVertex, DirectedEdge<NamedVertex>>;
 let a: NamedVertex;

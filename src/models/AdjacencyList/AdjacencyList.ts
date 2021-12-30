@@ -1,5 +1,5 @@
-import {Vertex} from '../Vertex/Vertex/Vertex';
-import {MutableHashMap} from "@tgillespie/hash-data-structures";
+import { Vertex } from '../Vertex/Vertex/Vertex';
+import { MutableHashMap } from '@tgillespie/hash-data-structures';
 
 export class AdjacencyList<V extends Vertex> {
 	protected _adjacencyList: MutableHashMap<V, V[]>;
