@@ -1,8 +1,8 @@
-import Edge from '../Edge/Edge';
-import Vertex from '../../Vertex/Vertex/Vertex';
+import {Edge} from '../Edge/Edge';
+import {Vertex} from '../../Vertex/Vertex/Vertex';
 import {Hashable} from "@tgillespie/hash-data-structures";
 
-class DirectedEdge<V extends Vertex> extends Edge<V> {
+export class DirectedEdge<V extends Vertex> extends Edge<V> {
 	get from(): V {
 		return this.vertexA;
 	}
@@ -27,5 +27,3 @@ class DirectedEdge<V extends Vertex> extends Edge<V> {
         return (this.vertexA.hashCode() << 24) - (this.vertexB.hashCode() << 8);
     }
 }
-
-export default DirectedEdge;

@@ -1,6 +1,6 @@
-import NamedVertex from '../../Vertex/NamedVertex/NamedVertex';
-import DirectedEdge from '../../Edge/DirectedEdge/DirectedEdge';
-import Graph from '../Graph';
+import {NamedVertex} from '../../Vertex/NamedVertex/NamedVertex';
+import {DirectedEdge} from '../../Edge/DirectedEdge/DirectedEdge';
+import {Graph} from '../Graph';
 import {
 	generateDirectedEdgesWithNameVertex,
 	generateNamedVertices,

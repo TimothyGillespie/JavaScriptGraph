@@ -1,7 +1,7 @@
-import Vertex from '../Vertex/Vertex';
+import {Vertex} from '../Vertex/Vertex';
 import {stringToHashCode} from "@tgillespie/hash-data-structures";
 
-class NamedVertex extends Vertex {
+export class NamedVertex extends Vertex {
 	name: string;
 
 	constructor(name: string) {
@@ -21,5 +21,3 @@ class NamedVertex extends Vertex {
         return stringToHashCode(this.name);
     }
 }
-
-export default NamedVertex;

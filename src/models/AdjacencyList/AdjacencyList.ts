@@ -1,10 +1,11 @@
-import Vertex from '../Vertex/Vertex/Vertex';
+import {Vertex} from '../Vertex/Vertex/Vertex';
+import {MutableHashMap} from "@tgillespie/hash-data-structures";
 
-class AdjacencyList<V extends Vertex> {
-	protected _adjacencyList: Map<V, V[]>;
+export class AdjacencyList<V extends Vertex> {
+	protected _adjacencyList: MutableHashMap<V, V[]>;
 
 	constructor() {
-		this._adjacencyList = new Map();
+		this._adjacencyList = new MutableHashMap<V, V[]>();
 	}
 
 	initVertex(vertex: V) {
@@ -25,5 +26,3 @@ class AdjacencyList<V extends Vertex> {
 		this.getAdjacentVertices(vertexB).push(vertexA);
 	}
 }
-
-export default AdjacencyList;

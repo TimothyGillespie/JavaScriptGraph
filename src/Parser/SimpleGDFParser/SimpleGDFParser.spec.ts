@@ -1,9 +1,9 @@
-import SimpleGDFParser from './SimpleGDFParser';
-import petersonGraph from '../../assets/FamousGraphs/PetersonGraph.gdf';
-import Graph from '../../models/Graph/Graph';
-import NamedVertex from '../../models/Vertex/NamedVertex/NamedVertex';
-import expectVerticesListsAreEqual from '../../../testUtil/expectVerticesListsAreEqual';
-import DirectedEdge from '../../models/Edge/DirectedEdge/DirectedEdge';
+import {SimpleGDFParser} from './SimpleGDFParser';
+import {petersonGraph} from '../../assets/FamousGraphs/PetersonGraph.gdf';
+import {Graph} from '../../models/Graph/Graph';
+import {NamedVertex} from '../../models/Vertex/NamedVertex/NamedVertex';
+import {expectVerticesListsAreEqual} from '../../../testUtil/expectVerticesListsAreEqual';
+import {DirectedEdge} from '../../models/Edge/DirectedEdge/DirectedEdge';
 import expectEdgeListsAreEqual from '../../../testUtil/expectEdgeListsAreEqual';
 import { generateDirectedEdgesWithNameVertex } from '../../../testUtil/generationFromSimplerDatastructure';
 

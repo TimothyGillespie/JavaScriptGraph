@@ -1,8 +1,8 @@
-import Graph from '../Graph';
-import Vertex from '../../Vertex/Vertex/Vertex';
+import {Graph} from '../Graph';
+import {Vertex} from '../../Vertex/Vertex/Vertex';
 import {MutableHashMap} from "@tgillespie/hash-data-structures";
 
-class TarjanStronglyConnectedComponentsAlgorithm<V extends Vertex> {
+export class TarjanStronglyConnectedComponentsAlgorithm<V extends Vertex> {
 	private constructor(graph: Graph<V, any>) {
 		this.graph = graph;
 
@@ -70,5 +70,3 @@ class TarjanStronglyConnectedComponentsAlgorithm<V extends Vertex> {
 		}
 	}
 }
-
-export default TarjanStronglyConnectedComponentsAlgorithm;

@@ -1,6 +1,6 @@
 import {Hashable, MutableHashMap} from "@tgillespie/hash-data-structures";
 
-abstract class Matrix<RowType extends Hashable, ColumnType extends Hashable, ValueType> {
+export abstract class Matrix<RowType extends Hashable, ColumnType extends Hashable, ValueType> {
 	defaultValue: ValueType;
 	matrix: MutableHashMap<RowType, MutableHashMap<ColumnType, ValueType>> = new MutableHashMap();
 
@@ -24,5 +24,3 @@ abstract class Matrix<RowType extends Hashable, ColumnType extends Hashable, Val
 		return cellData;
 	}
 }
-
-export default Matrix;

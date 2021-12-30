@@ -1,4 +1,4 @@
-const petersonGraph = `nodedef>name VARCHAR
+export const petersonGraph = `nodedef>name VARCHAR
 a
 b
 c
@@ -25,5 +25,3 @@ h,j
 j,g
 g,i
 i,f`;
-
-export default petersonGraph;

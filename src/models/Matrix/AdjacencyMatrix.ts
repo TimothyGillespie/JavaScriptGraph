@@ -1,8 +1,8 @@
-import Vertex from '../Vertex/Vertex/Vertex';
-import Matrix from './Matrix';
-import Edge from '../Edge/Edge/Edge';
+import {Vertex} from '../Vertex/Vertex/Vertex';
+import {Matrix} from './Matrix';
+import {Edge} from '../Edge/Edge/Edge';
 
-class AdjacencyMatrix<V extends Vertex> extends Matrix<V, V, boolean> {
+export class AdjacencyMatrix<V extends Vertex> extends Matrix<V, V, boolean> {
 	constructor() {
 		super(false);
 	}
@@ -20,5 +20,3 @@ class AdjacencyMatrix<V extends Vertex> extends Matrix<V, V, boolean> {
 		return matrix;
 	}
 }
-
-export default AdjacencyMatrix;

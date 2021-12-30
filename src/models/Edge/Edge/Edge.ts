@@ -1,7 +1,7 @@
-import Vertex from '../../Vertex/Vertex/Vertex';
+import {Vertex} from '../../Vertex/Vertex/Vertex';
 import {Hashable} from "@tgillespie/hash-data-structures";
 
-abstract class Edge<V extends Vertex> implements Hashable {
+export abstract class Edge<V extends Vertex> implements Hashable {
 	vertexA: V;
 	vertexB: V;
 
@@ -38,5 +38,3 @@ export function edgeEqual<V extends Vertex, E extends Edge<V>>(a: E, b: E) {
 export function edgeCompareTo<V extends Vertex, E extends Edge<V>>(a: E, b: E): number {
 	return a.compareTo(b);
 }
-
-export default Edge;

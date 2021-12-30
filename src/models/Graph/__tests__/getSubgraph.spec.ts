@@ -1,13 +1,13 @@
-import Graph from '../Graph';
-import NamedVertex from '../../Vertex/NamedVertex/NamedVertex';
-import Edge from '../../Edge/Edge/Edge';
+import {Graph} from '../Graph';
+import {NamedVertex} from '../../Vertex/NamedVertex/NamedVertex';
+import {Edge} from '../../Edge/Edge/Edge';
 import SimpleGDFParser from '../../../Parser/SimpleGDFParser/SimpleGDFParser';
-import petersonGraph from '../../../assets/FamousGraphs/PetersonGraph.gdf';
+import {petersonGraph} from '../../../assets/FamousGraphs/PetersonGraph.gdf';
 import {
 	generateDirectedEdgesWithNameVertex,
 	generateNamedVertices,
 } from '../../../../testUtil/generationFromSimplerDatastructure';
-import expectVerticesListsAreEqual from '../../../../testUtil/expectVerticesListsAreEqual';
+import {expectVerticesListsAreEqual} from '../../../../testUtil/expectVerticesListsAreEqual';
 
 let completeGraph: Graph<NamedVertex, Edge<NamedVertex>>;
 let subgraph: Graph<NamedVertex, Edge<NamedVertex>>;

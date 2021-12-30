@@ -1,6 +1,6 @@
 import {Hashable} from '@tgillespie/hash-data-structures';
 
-abstract class Vertex implements Hashable {
+export abstract class Vertex implements Hashable {
     abstract compareTo(other: this): number;
 
     abstract equals(other: any): boolean;
@@ -14,5 +14,3 @@ export function vertexEqual<V extends Vertex>(a: V, b: V) {
 export function vertexCompareTo<V extends Vertex>(a: V, b: V) {
 	return a.compareTo(b);
 }
-
-export default Vertex;

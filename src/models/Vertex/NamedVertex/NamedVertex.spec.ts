@@ -1,4 +1,4 @@
-import NamedVertex from "./NamedVertex";
+import {NamedVertex} from "./NamedVertex";
 import {ContractVerifier} from "@tgillespie/hash-data-structures";
 
 it('NamedVertex keeps Hashable Contract', () => {

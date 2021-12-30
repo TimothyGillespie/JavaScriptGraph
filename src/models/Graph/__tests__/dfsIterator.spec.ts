@@ -1,9 +1,8 @@
-import NamedVertex from '../../Vertex/NamedVertex/NamedVertex';
-import Graph from '../Graph';
-import Edge from '../../Edge/Edge/Edge';
-import DirectedEdge from '../../Edge/DirectedEdge/DirectedEdge';
-import expectVerticesListsAreEqual from '../../../../testUtil/expectVerticesListsAreEqual';
-import UndirectedEdge from '../../Edge/UndirectedEdge/UndirectedEdge';
+import {NamedVertex} from '../../Vertex/NamedVertex/NamedVertex';
+import {Graph} from '../Graph';
+import {Edge} from '../../Edge/Edge/Edge';
+import {DirectedEdge} from '../../Edge/DirectedEdge/DirectedEdge';
+import {UndirectedEdge} from '../../Edge/UndirectedEdge/UndirectedEdge';
 
 let graph: Graph<NamedVertex, Edge<NamedVertex>>;
 

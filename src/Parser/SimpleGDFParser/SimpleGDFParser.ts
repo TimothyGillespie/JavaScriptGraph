@@ -1,10 +1,10 @@
-import IStringParser from '../IStringParser';
-import Graph from '../../models/Graph/Graph';
-import NamedVertex from '../../models/Vertex/NamedVertex/NamedVertex';
-import DirectedEdge from '../../models/Edge/DirectedEdge/DirectedEdge';
+import {IStringParser} from '../IStringParser';
+import {Graph} from '../../models/Graph/Graph';
+import {NamedVertex} from '../../models/Vertex/NamedVertex/NamedVertex';
+import {DirectedEdge} from '../../models/Edge/DirectedEdge/DirectedEdge';
 
 // This parser is very rudimental and assumes alot
-class SimpleGDFParser implements IStringParser<Graph<NamedVertex, DirectedEdge<NamedVertex>>> {
+export class SimpleGDFParser implements IStringParser<Graph<NamedVertex, DirectedEdge<NamedVertex>>> {
 	currentMode: 'none' | 'nodedef' | 'edgedef' = 'none';
 	lines: string[] = [];
 	currentGraph: Graph<any, any> = new Graph<NamedVertex, DirectedEdge<NamedVertex>>();

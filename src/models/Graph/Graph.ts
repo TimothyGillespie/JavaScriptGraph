@@ -1,13 +1,13 @@
-import Vertex, { vertexCompareTo, vertexEqual } from '../Vertex/Vertex/Vertex';
-import Edge, { edgeEqual } from '../Edge/Edge/Edge';
+import {Vertex, vertexCompareTo, vertexEqual } from '../Vertex/Vertex/Vertex';
+import {Edge, edgeEqual } from '../Edge/Edge/Edge';
 import * as _ from 'lodash';
-import AdjacencyMatrix from '../Matrix/AdjacencyMatrix';
-import VertexNotFoundError from '../../Errors/VertexNotFoundError';
-import AdjacencyList from '../AdjacencyList/AdjacencyList';
-import TarjanStronglyConnectedComponentsAlgorithm from './algorithms/TarjanStronglyConnectedComponentsAlgorithm';
+import {AdjacencyMatrix} from '../Matrix/AdjacencyMatrix';
+import {VertexNotFoundError} from '../../Errors/VertexNotFoundError';
+import {AdjacencyList} from '../AdjacencyList/AdjacencyList';
+import {TarjanStronglyConnectedComponentsAlgorithm} from './algorithms/TarjanStronglyConnectedComponentsAlgorithm';
 import {MutableHashMap} from "@tgillespie/hash-data-structures";
 
-class Graph<V extends Vertex, E extends Edge<V>> {
+export class Graph<V extends Vertex, E extends Edge<V>> {
 	// Redundant information storage for performance
 	protected _listOfEdges: E[];
 	protected _listOfVertices: V[];
@@ -251,5 +251,3 @@ export interface GraphIterationCallbackParameter<V extends Vertex, E extends Edg
 	takenEdge: Readonly<E | null>;
 	payload: T;
 }
-
-export default Graph;

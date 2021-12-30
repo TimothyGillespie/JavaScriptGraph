@@ -1,6 +1,6 @@
-import Graph from '../models/Graph/Graph';
+import {Graph} from '../models/Graph/Graph';
 
-interface IStringParser<G extends Graph<any, any>> {
+export interface IStringParser<G extends Graph<any, any>> {
 	/**
 	 * Takes the complete input of the string to be parsed.
 	 * @param input the input of the standard
@@ -20,5 +20,3 @@ interface IStringParser<G extends Graph<any, any>> {
 	 */
 	parse(input: string): G;
 }
-
-export default IStringParser;

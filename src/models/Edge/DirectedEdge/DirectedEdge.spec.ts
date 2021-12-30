@@ -1,5 +1,5 @@
-import NamedVertex from "../../Vertex/NamedVertex/NamedVertex";
-import DirectedEdge from "./DirectedEdge";
+import {NamedVertex} from "../../Vertex/NamedVertex/NamedVertex";
+import {DirectedEdge} from "./DirectedEdge";
 import {ContractVerifier} from "@tgillespie/hash-data-structures";
 
 describe('DirectedEdge', () => {

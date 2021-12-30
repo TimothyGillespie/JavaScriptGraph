@@ -1,8 +1,8 @@
-import Graph from '../Graph';
-import NamedVertex from '../../Vertex/NamedVertex/NamedVertex';
-import DirectedEdge from '../../Edge/DirectedEdge/DirectedEdge';
-import Edge from '../../Edge/Edge/Edge';
-import UndirectedEdge from '../../Edge/UndirectedEdge/UndirectedEdge';
+import {Graph} from '../Graph';
+import {NamedVertex} from '../../Vertex/NamedVertex/NamedVertex';
+import {DirectedEdge} from '../../Edge/DirectedEdge/DirectedEdge';
+import {Edge} from '../../Edge/Edge/Edge';
+import {UndirectedEdge} from '../../Edge/UndirectedEdge/UndirectedEdge';
 
 let graph: Graph<NamedVertex, Edge<NamedVertex>>;
 
