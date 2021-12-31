@@ -1,8 +1,8 @@
 import { Graph } from '../Graph';
 import { NamedVertex } from '../../Vertex/NamedVertex/NamedVertex';
-import { Edge } from '../../Edge/Edge/Edge';
+import { Edge } from '../../Edge';
 import SimpleGDFParser from '../../../Parser/SimpleGDFParser/SimpleGDFParser';
-import { petersonGraph } from '../../../assets/FamousGraphs/PetersonGraph.gdf';
+import { petersonGraph } from '../../../assets';
 import {
 	generateDirectedEdgesWithNameVertex,
 	generateNamedVertices,
@@ -28,11 +28,13 @@ describe('g.getSubgraph(vs)', () => {
 		it('Edges which had both vertices passed are contained', () => {
 			const expectedEdges = generateDirectedEdgesWithNameVertex([
 				['a', 'b'],
-				['b', 'c'],
 				['d', 'e'],
 				['d', 'i'],
 				['e', 'j'],
+                ['e', 'a'],
 			]);
+
+            expectVerticesListsAreEqual(subgraph.getListOfEdges(), expectedEdges)
 		});
 	});
 });
