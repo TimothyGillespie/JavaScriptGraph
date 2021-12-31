@@ -1,10 +1,10 @@
 import { Vertex, vertexCompareTo, vertexEqual } from '../Vertex/Vertex/Vertex';
-import { Edge, edgeEqual } from '../Edge/Edge/Edge';
+import { Edge, edgeEqual } from '../Edge';
 import * as _ from 'lodash';
 import { AdjacencyMatrix } from '../Matrix/AdjacencyMatrix';
-import { VertexNotFoundError } from '../../Errors/VertexNotFoundError';
+import { VertexNotFoundError } from '../../Errors';
 import { AdjacencyList } from '../AdjacencyList/AdjacencyList';
-import { TarjanStronglyConnectedComponentsAlgorithm } from './algorithms/TarjanStronglyConnectedComponentsAlgorithm';
+import { TarjanStronglyConnectedComponentsAlgorithm } from './algorithms';
 import { MutableHashMap } from '@tgillespie/hash-data-structures';
 
 export class Graph<V extends Vertex, E extends Edge<V>> {
@@ -38,11 +38,26 @@ export class Graph<V extends Vertex, E extends Edge<V>> {
 		return this;
 	}
 
+    deleteVertex(...vertex: V[]): Graph<V, E> {
+        const uniqueVertices = _.uniqWith(vertex, vertexEqual);
+        const filteredVertices = _.intersectionWith(uniqueVertices, this._listOfVertices, vertexEqual);
+        filteredVertices.forEach((singleVertex) => {
+            this._listOfVertices = this._listOfVertices.filter(x => !x.equals(singleVertex));
+            this._listOfEdges = this._listOfEdges.filter(x => !x.vertexA.equals(singleVertex) && !x.vertexB.equals(singleVertex));
+
+            this._adjacencyMatrix.deleteVertex(singleVertex)
+
+            this._adjacencyList.deleteVertex(singleVertex);
+        });
+
+        return this;
+    }
+
 	addEdge(...edge: E[]): Graph<V, E> {
 		const uniqueEdges = _.uniqWith(edge, edgeEqual);
 		const filteredEdges = _.differenceWith(uniqueEdges, this._listOfEdges, edgeEqual);
 
-		if (!this.addsUnknownVerticesInEdges())
+		if (!this.addUnknownVerticesInEdges)
 			filteredEdges.forEach((singleEdge) => this.validateEdgeVerticesAreContainedInGraph(singleEdge));
 		else filteredEdges.forEach((singleEdge) => this.addVertex(singleEdge.vertexA, singleEdge.vertexB));
 
@@ -224,7 +239,7 @@ export class Graph<V extends Vertex, E extends Edge<V>> {
 		return _.cloneDeep(this._adjacencyList);
 	}
 
-	addsUnknownVerticesInEdges(): boolean {
+	get addUnknownVerticesInEdges(): boolean {
 		return this._addUnknownVerticesInEdges;
 	}
 

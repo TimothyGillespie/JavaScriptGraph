@@ -8,7 +8,7 @@ export class AdjacencyList<V extends Vertex> {
 		this._adjacencyList = new MutableHashMap<V, V[]>();
 	}
 
-	initVertex(vertex: V) {
+	initVertex(vertex: V): void {
 		this._adjacencyList.set(vertex, []);
 	}
 
@@ -20,9 +20,16 @@ export class AdjacencyList<V extends Vertex> {
 		return this._adjacencyList.get(vertex) ?? [];
 	}
 
-	addAdjacency(vertexA: V, vertexB: V) {
+	addAdjacency(vertexA: V, vertexB: V): void {
 		if (this._areAdjacent(vertexA, vertexB)) return;
 		this.getAdjacentVertices(vertexA).push(vertexB);
 		this.getAdjacentVertices(vertexB).push(vertexA);
 	}
+
+    deleteVertex(vertex: V): void {
+        this._adjacencyList.delete(vertex);
+        for(const [key, value] of this._adjacencyList.entries()) {
+            this._adjacencyList.set(key, value.filter(x => !x.equals(vertex)));
+        }
+    }
 }

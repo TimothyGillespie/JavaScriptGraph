@@ -1,6 +1,6 @@
 import { Vertex } from '../Vertex/Vertex/Vertex';
 import { Matrix } from './Matrix';
-import { Edge } from '../Edge/Edge/Edge';
+import { Edge } from '../Edge';
 
 export class AdjacencyMatrix<V extends Vertex> extends Matrix<V, V, boolean> {
 	constructor() {
@@ -19,4 +19,9 @@ export class AdjacencyMatrix<V extends Vertex> extends Matrix<V, V, boolean> {
 
 		return matrix;
 	}
+
+    deleteVertex(vertex: V) {
+        this.deleteRow(vertex);
+        this.deleteColumn(vertex);
+    }
 }

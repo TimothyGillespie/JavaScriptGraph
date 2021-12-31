@@ -1,6 +1,4 @@
-import {DirectedEdge} from '../src/models/Edge/DirectedEdge/DirectedEdge';
-import {NamedVertex} from '../src/models/Vertex/NamedVertex/NamedVertex';
-import {UndirectedEdge} from '../src/models/Edge/UndirectedEdge/UndirectedEdge';
+import {DirectedEdge, NamedVertex, UndirectedEdge} from "../src";
 
 export function generateDirectedEdgesWithNameVertex(definition: string[][]): DirectedEdge<NamedVertex>[] {
 	return definition.map(

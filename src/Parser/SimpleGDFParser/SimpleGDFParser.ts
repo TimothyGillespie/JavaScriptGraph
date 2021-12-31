@@ -1,7 +1,7 @@
 import { IStringParser } from '../IStringParser';
-import { Graph } from '../../models/Graph/Graph';
-import { NamedVertex } from '../../models/Vertex/NamedVertex/NamedVertex';
-import { DirectedEdge } from '../../models/Edge/DirectedEdge/DirectedEdge';
+import { Graph } from '../../models';
+import { NamedVertex } from '../../models';
+import { DirectedEdge } from '../../models';
 
 // This parser is very rudimental and assumes alot
 export class SimpleGDFParser implements IStringParser<Graph<NamedVertex, DirectedEdge<NamedVertex>>> {

@@ -23,4 +23,14 @@ export abstract class Matrix<RowType extends Hashable, ColumnType extends Hashab
 
 		return cellData;
 	}
+
+    deleteRow(row: RowType): void {
+        this.matrix.delete(row);
+    }
+
+    deleteColumn(column: ColumnType) {
+        for(const row of this.matrix.values()) {
+            row.delete(column);
+        }
+    }
 }
