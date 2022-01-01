@@ -20,8 +20,8 @@ export class AdjacencyMatrix<V extends Vertex> extends Matrix<V, V, boolean> {
 		return matrix;
 	}
 
-    deleteVertex(vertex: V) {
-        this.deleteRow(vertex);
-        this.deleteColumn(vertex);
-    }
+	deleteVertex(vertex: V) {
+		this.deleteRow(vertex);
+		this.deleteColumn(vertex);
+	}
 }

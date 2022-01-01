@@ -38,20 +38,22 @@ export class Graph<V extends Vertex, E extends Edge<V>> {
 		return this;
 	}
 
-    deleteVertex(...vertex: V[]): Graph<V, E> {
-        const uniqueVertices = _.uniqWith(vertex, vertexEqual);
-        const filteredVertices = _.intersectionWith(uniqueVertices, this._listOfVertices, vertexEqual);
-        filteredVertices.forEach((singleVertex) => {
-            this._listOfVertices = this._listOfVertices.filter(x => !x.equals(singleVertex));
-            this._listOfEdges = this._listOfEdges.filter(x => !x.vertexA.equals(singleVertex) && !x.vertexB.equals(singleVertex));
+	deleteVertex(...vertex: V[]): Graph<V, E> {
+		const uniqueVertices = _.uniqWith(vertex, vertexEqual);
+		const filteredVertices = _.intersectionWith(uniqueVertices, this._listOfVertices, vertexEqual);
+		filteredVertices.forEach((singleVertex) => {
+			this._listOfVertices = this._listOfVertices.filter((x) => !x.equals(singleVertex));
+			this._listOfEdges = this._listOfEdges.filter(
+				(x) => !x.vertexA.equals(singleVertex) && !x.vertexB.equals(singleVertex),
+			);
 
-            this._adjacencyMatrix.deleteVertex(singleVertex)
+			this._adjacencyMatrix.deleteVertex(singleVertex);
 
-            this._adjacencyList.deleteVertex(singleVertex);
-        });
+			this._adjacencyList.deleteVertex(singleVertex);
+		});
 
-        return this;
-    }
+		return this;
+	}
 
 	addEdge(...edge: E[]): Graph<V, E> {
 		const uniqueEdges = _.uniqWith(edge, edgeEqual);
@@ -75,21 +77,21 @@ export class Graph<V extends Vertex, E extends Edge<V>> {
 		return this;
 	}
 
-    deleteEdge(...edge: E[]): Graph<V, E> {
-        const uniqueEdges = _.uniqWith(edge, edgeEqual);
-        const filteredEdges = _.intersectionWith(uniqueEdges, this._listOfEdges, edgeEqual);
-        filteredEdges.forEach((singleEdge) => {
-            this._listOfEdges = this._listOfEdges.filter(x => !x.equals(singleEdge));
+	deleteEdge(...edge: E[]): Graph<V, E> {
+		const uniqueEdges = _.uniqWith(edge, edgeEqual);
+		const filteredEdges = _.intersectionWith(uniqueEdges, this._listOfEdges, edgeEqual);
+		filteredEdges.forEach((singleEdge) => {
+			this._listOfEdges = this._listOfEdges.filter((x) => !x.equals(singleEdge));
 
-            this._adjacencyMatrix.set(singleEdge.vertexA, singleEdge.vertexB, false);
-            if(!singleEdge.isDirected()) {
-                this._adjacencyMatrix.set(singleEdge.vertexB, singleEdge.vertexA, false);
-            }
-            this._adjacencyList.deleteEdge(singleEdge);
-        });
+			this._adjacencyMatrix.set(singleEdge.vertexA, singleEdge.vertexB, false);
+			if (!singleEdge.isDirected()) {
+				this._adjacencyMatrix.set(singleEdge.vertexB, singleEdge.vertexA, false);
+			}
+			this._adjacencyList.deleteEdge(singleEdge);
+		});
 
-        return this;
-    }
+		return this;
+	}
 
 	getAdjacentVerticesFor(vertex: V): V[] {
 		return this.getAdjacencyList().getAdjacentVertices(vertex);

@@ -31,10 +31,10 @@ describe('g.getSubgraph(vs)', () => {
 				['d', 'e'],
 				['d', 'i'],
 				['e', 'j'],
-                ['e', 'a'],
+				['e', 'a'],
 			]);
 
-            expectVerticesListsAreEqual(subgraph.getListOfEdges(), expectedEdges)
+			expectVerticesListsAreEqual(subgraph.getListOfEdges(), expectedEdges);
 		});
 	});
 });
