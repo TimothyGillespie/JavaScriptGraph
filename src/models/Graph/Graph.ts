@@ -75,6 +75,22 @@ export class Graph<V extends Vertex, E extends Edge<V>> {
 		return this;
 	}
 
+    deleteEdge(...edge: E[]): Graph<V, E> {
+        const uniqueEdges = _.uniqWith(edge, edgeEqual);
+        const filteredEdges = _.intersectionWith(uniqueEdges, this._listOfEdges, edgeEqual);
+        filteredEdges.forEach((singleEdge) => {
+            this._listOfEdges = this._listOfEdges.filter(x => !x.equals(singleEdge));
+
+            this._adjacencyMatrix.set(singleEdge.vertexA, singleEdge.vertexB, false);
+            if(!singleEdge.isDirected()) {
+                this._adjacencyMatrix.set(singleEdge.vertexB, singleEdge.vertexA, false);
+            }
+            this._adjacencyList.deleteEdge(singleEdge);
+        });
+
+        return this;
+    }
+
 	getAdjacentVerticesFor(vertex: V): V[] {
 		return this.getAdjacencyList().getAdjacentVertices(vertex);
 	}

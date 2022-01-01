@@ -2,4 +2,5 @@
 
 ## New Features
 
-- added `deleteVertex(...vertex: V[])` method on Graph
+- added `deleteVertex(...vertex: V[])` methode on `Graph`
+- added `deleteEdge(...edge: E[])` methode on `Graph`
