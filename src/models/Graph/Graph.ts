@@ -6,7 +6,7 @@ import { VertexNotFoundError } from '../../Errors';
 import { AdjacencyList } from '../AdjacencyList/AdjacencyList';
 import { TarjanStronglyConnectedComponentsAlgorithm } from './algorithms';
 import { MutableHashMap } from '@tgillespie/hash-data-structures';
-import {MutableHashSet} from "@tgillespie/hash-data-structures/lib/lib/mutable-hash-set/mutable-hash-set";
+import { MutableHashSet } from '@tgillespie/hash-data-structures/lib/lib/mutable-hash-set/mutable-hash-set';
 
 export class Graph<V extends Vertex, E extends Edge<V>> {
 	// Redundant information storage for performance
@@ -30,14 +30,14 @@ export class Graph<V extends Vertex, E extends Edge<V>> {
 
 	addVertex(...vertex: V[]): Graph<V, E> {
 		const uniqueVertices = new MutableHashSet<V>();
-        const setOfGraphVertices = new MutableHashSet<V>();
+		const setOfGraphVertices = new MutableHashSet<V>();
 
-        vertex.forEach(x => uniqueVertices.add(x));
-        this._listOfVertices.forEach(x => setOfGraphVertices.add(x));
+		vertex.forEach((x) => uniqueVertices.add(x));
+		this._listOfVertices.forEach((x) => setOfGraphVertices.add(x));
 
-        const filteredVertices = uniqueVertices.difference(setOfGraphVertices).toArray();
+		const filteredVertices = uniqueVertices.difference(setOfGraphVertices).toArray();
 
-        filteredVertices.forEach((singleVertex) => {
+		filteredVertices.forEach((singleVertex) => {
 			this._listOfVertices.push(singleVertex);
 			this._adjacencyList.initVertex(singleVertex);
 		});
@@ -46,13 +46,13 @@ export class Graph<V extends Vertex, E extends Edge<V>> {
 	}
 
 	deleteVertex(...vertex: V[]): Graph<V, E> {
-        const uniqueVertices = new MutableHashSet<V>();
-        const setOfGraphVertices = new MutableHashSet<V>();
+		const uniqueVertices = new MutableHashSet<V>();
+		const setOfGraphVertices = new MutableHashSet<V>();
 
-        vertex.forEach(x => uniqueVertices.add(x));
-        this._listOfVertices.forEach(x => setOfGraphVertices.add(x));
+		vertex.forEach((x) => uniqueVertices.add(x));
+		this._listOfVertices.forEach((x) => setOfGraphVertices.add(x));
 
-        const filteredVertices = uniqueVertices.intersection(setOfGraphVertices).toArray();
+		const filteredVertices = uniqueVertices.intersection(setOfGraphVertices).toArray();
 		filteredVertices.forEach((singleVertex) => {
 			this._listOfVertices = this._listOfVertices.filter((x) => !x.equals(singleVertex));
 			this._listOfEdges = this._listOfEdges.filter(
@@ -68,13 +68,13 @@ export class Graph<V extends Vertex, E extends Edge<V>> {
 	}
 
 	addEdge(...edge: E[]): Graph<V, E> {
-        const uniqueEdges = new MutableHashSet<E>();
-        const setOfGraphEdges = new MutableHashSet<E>();
+		const uniqueEdges = new MutableHashSet<E>();
+		const setOfGraphEdges = new MutableHashSet<E>();
 
-        edge.forEach(x => uniqueEdges.add(x));
-        this._listOfEdges.forEach(x => setOfGraphEdges.add(x));
+		edge.forEach((x) => uniqueEdges.add(x));
+		this._listOfEdges.forEach((x) => setOfGraphEdges.add(x));
 
-        const filteredEdges = uniqueEdges.difference(setOfGraphEdges).toArray();
+		const filteredEdges = uniqueEdges.difference(setOfGraphEdges).toArray();
 
 		if (!this.addUnknownVerticesInEdges)
 			filteredEdges.forEach((singleEdge) => this.validateEdgeVerticesAreContainedInGraph(singleEdge));
@@ -95,13 +95,13 @@ export class Graph<V extends Vertex, E extends Edge<V>> {
 	}
 
 	deleteEdge(...edge: E[]): Graph<V, E> {
-        const uniqueEdges = new MutableHashSet<E>();
-        const setOfGraphEdges = new MutableHashSet<E>();
+		const uniqueEdges = new MutableHashSet<E>();
+		const setOfGraphEdges = new MutableHashSet<E>();
 
-        edge.forEach(x => uniqueEdges.add(x));
-        this._listOfEdges.forEach(x => setOfGraphEdges.add(x));
+		edge.forEach((x) => uniqueEdges.add(x));
+		this._listOfEdges.forEach((x) => setOfGraphEdges.add(x));
 
-        const filteredEdges = uniqueEdges.intersection(setOfGraphEdges).toArray();
+		const filteredEdges = uniqueEdges.intersection(setOfGraphEdges).toArray();
 		filteredEdges.forEach((singleEdge) => {
 			this._listOfEdges = this._listOfEdges.filter((x) => !x.equals(singleEdge));
 
@@ -139,8 +139,8 @@ export class Graph<V extends Vertex, E extends Edge<V>> {
 			});
 		}
 
-        const resultSet = new MutableHashSet<V>();
-        result.forEach(x => resultSet.add(x));
+		const resultSet = new MutableHashSet<V>();
+		result.forEach((x) => resultSet.add(x));
 
 		return resultSet.toArray();
 	}
@@ -204,7 +204,7 @@ export class Graph<V extends Vertex, E extends Edge<V>> {
 			let takenEdge = null;
 			let previousVertex = null;
 
-			while (![...visited.values()].every(x => x)) {
+			while (![...visited.values()].every((x) => x)) {
 				currentVertex = stack.pop();
 				if (currentVertex === undefined) {
 					takenEdge = null;
