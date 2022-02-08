@@ -4,7 +4,7 @@ export abstract class Matrix<RowType extends Hashable, ColumnType extends Hashab
 	defaultValue: ValueType;
 	matrix: MutableHashMap<RowType, MutableHashMap<ColumnType, ValueType>> = new MutableHashMap();
 
-	constructor(defaultValue: ValueType) {
+	protected constructor(defaultValue: ValueType) {
 		this.defaultValue = defaultValue;
 	}
 

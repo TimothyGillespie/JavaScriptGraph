@@ -1,5 +1,6 @@
 import { Vertex, vertexCompareTo } from '../Vertex/Vertex/Vertex';
 import { Edge } from '../Edge';
+// @ts-ignore
 import * as cloneDeep from 'lodash.clonedeep';
 import { AdjacencyMatrix } from '../Matrix/AdjacencyMatrix';
 import { VertexNotFoundError } from '../../Errors';
