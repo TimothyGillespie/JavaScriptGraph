@@ -22,6 +22,8 @@ const directedEdges = [
     new DirectedEdge(d, b),
     new DirectedEdge(g, b),
     new DirectedEdge(g, d),
+    new DirectedEdge(c, c),
+    new DirectedEdge(d, d),
 ];
 
 const undirectedEdges = [
@@ -30,6 +32,8 @@ const undirectedEdges = [
     new UndirectedEdge(c, g),
     new UndirectedEdge(a, e),
     new UndirectedEdge(f, g),
+    new UndirectedEdge(c, c),
+    new UndirectedEdge(g, g),
 ];
 
 describe('Test retrieving attached, incoming and outgoing edges for a vertex', () => {
@@ -52,6 +56,7 @@ describe('Test retrieving attached, incoming and outgoing edges for a vertex', (
                 new DirectedEdge(c, b),
                 new DirectedEdge(d, c),
                 new DirectedEdge(e, c),
+                new DirectedEdge(c, c),
             ]);
         });
 
@@ -62,6 +67,7 @@ describe('Test retrieving attached, incoming and outgoing edges for a vertex', (
             expectEdgeListsAreEqual(attachedEdges, [
                 new UndirectedEdge(c, f),
                 new UndirectedEdge(c, g),
+                new UndirectedEdge(c, c),
             ]);
         });
 
@@ -74,8 +80,10 @@ describe('Test retrieving attached, incoming and outgoing edges for a vertex', (
                 new DirectedEdge(c, b),
                 new DirectedEdge(d, c),
                 new DirectedEdge(e, c),
+                new DirectedEdge(c, c),
                 new UndirectedEdge(c, f),
                 new UndirectedEdge(c, g),
+                new UndirectedEdge(c, c),
             ]);
         });
     });
@@ -92,6 +100,7 @@ describe('Test retrieving attached, incoming and outgoing edges for a vertex', (
             expectEdgeListsAreEqual(attachedEdges, [
                 new DirectedEdge(c, a),
                 new DirectedEdge(c, b),
+                new DirectedEdge(c, c),
             ]);
         });
 
@@ -102,6 +111,7 @@ describe('Test retrieving attached, incoming and outgoing edges for a vertex', (
             expectEdgeListsAreEqual(attachedEdges, [
                 new UndirectedEdge(c, f),
                 new UndirectedEdge(c, g),
+                new UndirectedEdge(c, c),
             ]);
         });
 
@@ -112,8 +122,10 @@ describe('Test retrieving attached, incoming and outgoing edges for a vertex', (
             expectEdgeListsAreEqual(attachedEdges, [
                 new DirectedEdge(c, a),
                 new DirectedEdge(c, b),
+                new DirectedEdge(c, c),
                 new UndirectedEdge(c, f),
                 new UndirectedEdge(c, g),
+                new UndirectedEdge(c, c),
             ]);
         });
     });
@@ -130,6 +142,7 @@ describe('Test retrieving attached, incoming and outgoing edges for a vertex', (
             expectEdgeListsAreEqual(attachedEdges, [
                 new DirectedEdge(d, c),
                 new DirectedEdge(e, c),
+                new DirectedEdge(c, c),
             ]);
         });
 
@@ -140,6 +153,7 @@ describe('Test retrieving attached, incoming and outgoing edges for a vertex', (
             expectEdgeListsAreEqual(attachedEdges, [
                 new UndirectedEdge(c, f),
                 new UndirectedEdge(c, g),
+                new UndirectedEdge(c, c),
             ]);
         });
 
@@ -150,8 +164,10 @@ describe('Test retrieving attached, incoming and outgoing edges for a vertex', (
             expectEdgeListsAreEqual(attachedEdges, [
                 new DirectedEdge(d, c),
                 new DirectedEdge(e, c),
+                new DirectedEdge(c, c),
                 new UndirectedEdge(c, f),
                 new UndirectedEdge(c, g),
+                new UndirectedEdge(c, c),
             ]);
         });
     });
