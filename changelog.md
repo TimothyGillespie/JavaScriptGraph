@@ -1,3 +1,11 @@
+# Version 0.4.0
+
+## New Features
+
+- added `getAttachedEdges(vertex: V)` method on `Graph`
+- added `getOutgoingEdges(vertex: V)` method on `Graph`
+- added `getIncomingEdges(vertex: V)` method on `Graph`
+
 # Version 0.3.1
 
 ## Improvements

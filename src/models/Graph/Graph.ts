@@ -1,5 +1,5 @@
-import { Vertex, vertexCompareTo, vertexEqual } from '../Vertex/Vertex/Vertex';
-import { Edge, edgeEqual } from '../Edge';
+import { Vertex, vertexCompareTo } from '../Vertex/Vertex/Vertex';
+import { Edge } from '../Edge';
 import * as cloneDeep from 'lodash.clonedeep';
 import { AdjacencyMatrix } from '../Matrix/AdjacencyMatrix';
 import { VertexNotFoundError } from '../../Errors';
@@ -117,6 +117,32 @@ export class Graph<V extends Vertex, E extends Edge<V>> {
 
 	getAdjacentVerticesFor(vertex: V): V[] {
 		return this.getAdjacencyList().getAdjacentVertices(vertex);
+	}
+
+	getAttachedEdges(vertex: V): E[] {
+		return this.getListOfEdges().filter(({vertexA, vertexB}) => {
+			return vertexA.equals(vertex) || vertexB.equals(vertex);
+		});
+	}
+
+	getOutgoingEdges(vertex: V): E[] {
+		return this.getListOfEdges().filter(({vertexA, vertexB, isDirected}) => {
+			if(isDirected()) {
+				return vertexA.equals(vertex)
+			}
+
+			return vertexA.equals(vertex) || vertexB.equals(vertex);
+		});
+	}
+
+	getIncomingEdges(vertex: V): E[] {
+		return this.getListOfEdges().filter(({vertexA, vertexB, isDirected}) => {
+			if(isDirected()) {
+				return vertexB.equals(vertex)
+			}
+
+			return vertexA.equals(vertex) || vertexB.equals(vertex);
+		});
 	}
 
 	getChildVertices(vertex: V): V[] {
