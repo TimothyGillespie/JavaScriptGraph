@@ -16,7 +16,7 @@ jobs:
           node-version: 16
       - run: npm ci
       - run: npm test
-      - run: npm mutation-test
+      - run: npm run mutation-test
       - name: Get tag
         id: tag
         uses: dawidd6/action-get-tag@v1
