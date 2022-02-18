@@ -41,7 +41,6 @@ export class Graph<V extends Vertex, E extends Edge<V>> {
 		this._addUnknownVerticesInEdges = addUnknownVerticesInEdges;
 	}
 
-
 	/**
 	 * Attempt to add one or many vertices. Vertices which are already contained in the Graph (determined by their .equals() method)
 	 * are not ignored.
@@ -202,7 +201,7 @@ export class Graph<V extends Vertex, E extends Edge<V>> {
 	 * @param vertex The vertex which attached edges should be found.
 	 */
 	getAttachedEdges(vertex: V): E[] {
-		return this.getListOfEdges().filter(({vertexA, vertexB}) => {
+		return this.getListOfEdges().filter(({ vertexA, vertexB }) => {
 			return vertexA.equals(vertex) || vertexB.equals(vertex);
 		});
 	}
@@ -214,9 +213,9 @@ export class Graph<V extends Vertex, E extends Edge<V>> {
 	 * @param vertex The vertex which attached edges should be found.
 	 */
 	getOutgoingEdges(vertex: V): E[] {
-		return this.getListOfEdges().filter(({vertexA, vertexB, isDirected}) => {
-			if(isDirected()) {
-				return vertexA.equals(vertex)
+		return this.getListOfEdges().filter(({ vertexA, vertexB, isDirected }) => {
+			if (isDirected()) {
+				return vertexA.equals(vertex);
 			}
 
 			return vertexA.equals(vertex) || vertexB.equals(vertex);
@@ -230,9 +229,9 @@ export class Graph<V extends Vertex, E extends Edge<V>> {
 	 * @param vertex The vertex which attached edges should be found.
 	 */
 	getIncomingEdges(vertex: V): E[] {
-		return this.getListOfEdges().filter(({vertexA, vertexB, isDirected}) => {
-			if(isDirected()) {
-				return vertexB.equals(vertex)
+		return this.getListOfEdges().filter(({ vertexA, vertexB, isDirected }) => {
+			if (isDirected()) {
+				return vertexB.equals(vertex);
 			}
 
 			return vertexA.equals(vertex) || vertexB.equals(vertex);

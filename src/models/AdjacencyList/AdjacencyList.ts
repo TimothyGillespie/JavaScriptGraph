@@ -39,7 +39,7 @@ export class AdjacencyList<V extends Vertex> {
 
 	deleteEdge(edge: Edge<V>): void {
 		const previousDirectedEdgeVertices = this._adjacencyList.get(edge.vertexA);
-		if(previousDirectedEdgeVertices) {
+		if (previousDirectedEdgeVertices) {
 			this._adjacencyList.set(
 				edge.vertexA,
 				previousDirectedEdgeVertices.filter((x) => !x.equals(edge.vertexB)),
@@ -48,7 +48,7 @@ export class AdjacencyList<V extends Vertex> {
 
 		// Because it is about adjacency it must be done for both directed and undirected edges
 		const previousOppositeEdge = this._adjacencyList.get(edge.vertexB);
-		if(previousOppositeEdge) {
+		if (previousOppositeEdge) {
 			this._adjacencyList.set(
 				edge.vertexB,
 				previousOppositeEdge.filter((x) => !x.equals(edge.vertexA)),
