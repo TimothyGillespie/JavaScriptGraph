@@ -2,8 +2,7 @@ name: Build Jekyll
 
 on:
   push:
-    branches:
-      - jekyll-setup
+    branches: [jekyll-setup]
 
 jobs:
   build-jekyll:
