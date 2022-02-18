@@ -27,7 +27,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./coverage
-          destination_dir: ./unit-test-coverage-reports/${{steps.tag.outputs.tag}}
+          destination_dir: ./test-coverage-reports/unit-test-coverage-reports/${{steps.tag.outputs.tag}}
           publish_branch: jekyll-setup
           enable_jekyll: true
       - name: Publish as latest Unit Test Coverage (Jest)
@@ -35,7 +35,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./coverage
-          destination_dir: ./unit-test-coverage-reports/latest
+          destination_dir: ./test-coverage-reports/unit-test-coverage-reports/latest
           publish_branch: jekyll-setup
           enable_jekyll: true
       - name: Publish as latest Mutation Test Coverage (Stryker)
@@ -43,7 +43,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./reports/mutation/html
-          destination_dir: ./mutation-test-coverage-reports/latest
+          destination_dir: ./test-coverage-reports/mutation-test-coverage-reports/latest
           publish_branch: jekyll-setup
           enable_jekyll: true
       - name: Publish as ${{steps.tag.outputs.tag}} Mutation Test Coverage (Stryker)
@@ -51,7 +51,7 @@ jobs:
         with:
           personal_token: ${{ secrets.JEKYLL_PAT }}
           publish_dir: ./reports/mutation/html
-          destination_dir: ./mutation-test-coverage-reports/${{steps.tag.outputs.tag}}
+          destination_dir: ./test-coverage-reports/mutation-test-coverage-reports/${{steps.tag.outputs.tag}}
           publish_branch: jekyll-setup
           enable_jekyll: true
       - uses: JS-DevTools/npm-publish@v1
