@@ -57,5 +57,8 @@
 	"dependencies": {
 		"@tgillespie/hash-data-structures": "^1.2.0",
 		"lodash.clonedeep": "^4.5.0"
+	},
+	"optionalDependencies": {
+		"fsevents": "^2.3.2"
 	}
 }
