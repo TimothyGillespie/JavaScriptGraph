@@ -16,17 +16,24 @@ jobs:
           node-version: 16
       - run: npm ci
       - run: npm test
+      - run: npm mutation-test
       - name: Get tag
         id: tag
         uses: dawidd6/action-get-tag@v1
         with:
           strip_v: true
-      - name: Publish Coverage
+      - name: Publish Unit Test Coverage (Jest)
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./coverage
           destination_dir: ./unit-test-coverage-reports/${{steps.tag.outputs.tag}}
+      - name: Publish Mutation Test Coverage (Stryker)
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./reports/mutation/html
+          destination_dir: ./mutation-test-coverage-reports/${{steps.tag.outputs.tag}}
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_PUBLISH_TOKEN }}
