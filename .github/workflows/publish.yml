@@ -42,7 +42,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./reports/mutation/html
+          publish_dir: ./reports/mutation
           destination_dir: ./test-coverage-reports/mutation-test-coverage-reports/latest
           publish_branch: jekyll-setup
           enable_jekyll: true
@@ -50,7 +50,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.JEKYLL_PAT }}
-          publish_dir: ./reports/mutation/html
+          publish_dir: ./reports/mutation
           destination_dir: ./test-coverage-reports/mutation-test-coverage-reports/${{steps.tag.outputs.tag}}
           publish_branch: jekyll-setup
           enable_jekyll: true
