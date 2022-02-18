@@ -7,10 +7,8 @@ export abstract class Vertex implements Hashable {
 	abstract hashCode(): number;
 }
 
-export function vertexEqual<V extends Vertex>(a: V, b: V) {
-	return a.equals(b);
-}
+export const vertexEqual = <V extends Vertex>(a: V, b: V): boolean =>
+	a.equals(b);
 
-export function vertexCompareTo<V extends Vertex>(a: V, b: V) {
-	return a.compareTo(b);
-}
+export const vertexCompareTo = <V extends Vertex>(a: V, b: V): number =>
+	a.compareTo(b);

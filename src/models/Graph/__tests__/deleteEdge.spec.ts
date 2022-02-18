@@ -7,7 +7,7 @@ import {
 } from '../../../../testUtil/generationFromSimplerDatastructure';
 import { NamedVertex } from '../../Vertex/NamedVertex/NamedVertex';
 import { expectVerticesListsAreEqual } from '../../../../testUtil/expectVerticesListsAreEqual';
-import expectEdgeListsAreEqual from '../../../../testUtil/expectEdgeListsAreEqual';
+import { expectEdgeListsAreEqual } from '../../../../testUtil/expectEdgeListsAreEqual';
 import * as _ from 'lodash';
 
 let graph: Graph<NamedVertex, Edge<NamedVertex>>;

@@ -1,7 +1,7 @@
 import {Graph} from "../Graph";
 import {NamedVertex} from "../../Vertex/NamedVertex/NamedVertex";
 import {DirectedEdge, Edge, UndirectedEdge} from "../../Edge";
-import expectEdgeListsAreEqual from "../../../../testUtil/expectEdgeListsAreEqual";
+import { expectEdgeListsAreEqual } from "../../../../testUtil/expectEdgeListsAreEqual";
 
 let graph: Graph<NamedVertex, Edge<NamedVertex>>;
 

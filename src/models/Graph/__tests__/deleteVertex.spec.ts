@@ -6,7 +6,7 @@ import {
 } from '../../../../testUtil/generationFromSimplerDatastructure';
 import { NamedVertex } from '../../Vertex/NamedVertex/NamedVertex';
 import { expectVerticesListsAreEqual } from '../../../../testUtil/expectVerticesListsAreEqual';
-import expectEdgeListsAreEqual from '../../../../testUtil/expectEdgeListsAreEqual';
+import { expectEdgeListsAreEqual } from '../../../../testUtil/expectEdgeListsAreEqual';
 
 describe('graph.deleteVertex(v)', () => {
 	let graph: Graph<NamedVertex, DirectedEdge<NamedVertex>>;

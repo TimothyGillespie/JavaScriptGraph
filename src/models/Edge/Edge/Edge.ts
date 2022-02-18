@@ -29,10 +29,9 @@ export abstract class Edge<V extends Vertex> implements Hashable {
 	abstract hashCode(): number;
 }
 
-export function edgeEqual<V extends Vertex, E extends Edge<V>>(a: E, b: E) {
-	return a.equals(b as Hashable);
-}
+export const edgeEqual = <V extends Vertex, E extends Edge<V>>(a: E, b: E): boolean =>
+	a.equals(b as Hashable);
 
-export function edgeCompareTo<V extends Vertex, E extends Edge<V>>(a: E, b: E): number {
-	return a.compareTo(b);
-}
+export const edgeCompareTo = <V extends Vertex, E extends Edge<V>>(a: E, b: E): number =>
+	a.compareTo(b);
+
