@@ -52,7 +52,12 @@
 			"jsx",
 			"json",
 			"node"
-		]
+		],
+		"globals": {
+			"ts-jest": {
+				"tsConfig": "tsconfig.test.json"
+			}
+		}
 	},
 	"dependencies": {
 		"@tgillespie/hash-data-structures": "^1.2.0",
