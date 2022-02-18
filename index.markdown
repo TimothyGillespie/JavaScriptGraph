@@ -8,5 +8,6 @@ titel: Work In Progress
 
 But test coverage are already available.
 
-Links:
-(GitHub)[https://timothygillespie.github.io/JavaScriptGraph/]
+## Links
+
+(https://timothygillespie.github.io/JavaScriptGraph/)[GitHub]
