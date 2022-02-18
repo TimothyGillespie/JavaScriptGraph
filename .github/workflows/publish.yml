@@ -9,11 +9,23 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - name: Setting up Node 16
+        uses: actions/setup-node@v2
         with:
-          node-version: 14
-      - run: npm install
+          node-version: 16
+      - run: npm ci
+      - run: npm test
+      - name: Get tag
+        id: tag
+        uses: dawidd6/action-get-tag@v1
+        with:
+          strip_v: true
+      - name: Publish Coverage
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./unit-test-coverage-reports/${{steps.tag.outputs.tag}}
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_PUBLISH_TOKEN }}
