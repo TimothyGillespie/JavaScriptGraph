@@ -6,7 +6,7 @@ on:
       - jekyll-setup
 
 jobs:
-  github-pages:
+  build-jekyll:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
