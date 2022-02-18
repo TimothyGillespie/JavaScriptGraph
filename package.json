@@ -19,7 +19,7 @@
 		"format": "prettier --write \"src/**/*.ts\" \"./.prettierrc\"",
 		"lint": "tslint -p tsconfig.json",
 		"prepublishOnly": "npm run build && npm test && npm run lint",
-		"preversion": "npm run lint && npm run format && npm run test &&",
+		"preversion": "npm run lint && npm run format && npm run test",
 		"postversion": "git push && git push --tags"
 	},
 	"author": "Timothy Gillespie",
