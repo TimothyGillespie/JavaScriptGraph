@@ -17,5 +17,6 @@ jobs:
             ${{ runner.os }}-gems-
       - uses: helaili/jekyll-action@v2
         with:
+          keep_history: true
           token: ${{ secrets.JEKYLL_PAT }}
           target_branch: gh-pages
