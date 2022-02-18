@@ -16,7 +16,7 @@
 		"build:windows": "rd ./lib && tsc",
 		"test": "jest",
 		"mutation-test": "stryker run",
-		"format": "prettier --write \"src/**/*.ts\" \"./*.json\" \"./.prettierrc\"",
+		"format": "prettier --write \"src/**/*.ts\" \"./.prettierrc\"",
 		"lint": "tslint -p tsconfig.json",
 		"prepublishOnly": "npm run build && npm test && npm run lint",
 		"preversion": "npm run test && npm run lint",
