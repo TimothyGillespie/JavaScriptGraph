@@ -22,8 +22,8 @@ title: JavaScript Graph
 email: JavaScriptGraph@gillespie.eu
 description: >- # this means to ignore newlines until "baseurl:"
   A JavaScript Graph library
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "timothygillespie.github.io/JavaScriptGraph/" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/JavaScriptGraph/" # the subpath of your site, e.g. /blog
+url: "timothygillespie.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Build settings
 theme: minima
