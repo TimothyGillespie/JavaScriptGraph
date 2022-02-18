@@ -5,3 +5,5 @@ node_modules
 .stryker-tmp
 reports
 coverage
+/.jekyll-cache
+/_site
