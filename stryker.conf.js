@@ -3,7 +3,7 @@
  */
 module.exports = {
 	packageManager: 'npm',
-	reporters: ['html', 'clear-text', 'progress', 'json', 'dots', 'dashboard', 'event-recorder'],
+	reporters: ['html', 'clear-text', 'progress', 'json'],
 	testRunner: 'jest',
 	coverageAnalysis: 'perTest',
 	ignorePatterns: ['lib']
