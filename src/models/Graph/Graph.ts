@@ -58,7 +58,6 @@ export class Graph<V extends Vertex, E extends Edge<V>> {
 
 		filteredVertices.forEach((singleVertex) => {
 			this._listOfVertices.push(singleVertex);
-			this._adjacencyList.initVertex(singleVertex);
 		});
 
 		return this;

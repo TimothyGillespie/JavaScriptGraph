@@ -1,3 +1,9 @@
+# Version 0.5.0
+
+# Bug Fixes
+
+- Fixed a bug in AdjacencyList where it was never updated when vertices where put as adjacent.
+
 # Version 0.4.x
 
 No actual changes. Used for tuning publishing process
