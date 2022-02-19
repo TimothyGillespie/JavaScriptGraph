@@ -13,7 +13,7 @@ export class AdjacencyList<V extends Vertex> {
 		this._adjacencyList.set(vertex, []);
 	}
 
-	protected _areAdjacent(from: V, to: V): boolean {
+	areAdjacent(from: V, to: V): boolean {
 		return this.getAdjacentVertices(from).find((singleVertex) => singleVertex.equals(to)) !== undefined;
 	}
 
@@ -22,7 +22,7 @@ export class AdjacencyList<V extends Vertex> {
 	}
 
 	addAdjacency(vertexA: V, vertexB: V): void {
-		if (this._areAdjacent(vertexA, vertexB)) return;
+		if (this.areAdjacent(vertexA, vertexB)) return;
 		this.getAdjacentVertices(vertexA).push(vertexB);
 		this.getAdjacentVertices(vertexB).push(vertexA);
 	}
