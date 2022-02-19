@@ -9,10 +9,6 @@ export class AdjacencyList<V extends Vertex> {
 		this._adjacencyList = new MutableHashMap<V, V[]>();
 	}
 
-	initVertex(vertex: V): void {
-		this._adjacencyList.set(vertex, []);
-	}
-
 	areAdjacent(from: V, to: V): boolean {
 		return this.getAdjacentVertices(from).find((singleVertex) => singleVertex.equals(to)) !== undefined;
 	}
@@ -23,8 +19,8 @@ export class AdjacencyList<V extends Vertex> {
 
 	addAdjacency(vertexA: V, vertexB: V): void {
 		if (this.areAdjacent(vertexA, vertexB)) return;
-		this.getAdjacentVertices(vertexA).push(vertexB);
-		this.getAdjacentVertices(vertexB).push(vertexA);
+		this._adjacencyList.set(vertexA, [...this.getAdjacentVertices(vertexA),vertexB]);
+		this._adjacencyList.set(vertexB, [...this.getAdjacentVertices(vertexB),vertexA]);
 	}
 
 	deleteVertex(vertex: V): void {
@@ -38,20 +34,30 @@ export class AdjacencyList<V extends Vertex> {
 	}
 
 	deleteEdge(edge: Edge<V>): void {
-		const previousDirectedEdgeVertices = this._adjacencyList.get(edge.vertexA);
-		if (previousDirectedEdgeVertices) {
+		const vertexAList = this._adjacencyList.get(edge.vertexA) ?? [];
+		const newVertexAList = vertexAList.filter((x) => !x.equals(edge.vertexB));
+		if(newVertexAList.length > 0) {
 			this._adjacencyList.set(
 				edge.vertexA,
-				previousDirectedEdgeVertices.filter((x) => !x.equals(edge.vertexB)),
+				newVertexAList,
+			);
+		} else {
+			this._adjacencyList.delete(
+				edge.vertexA
 			);
 		}
 
 		// Because it is about adjacency it must be done for both directed and undirected edges
-		const previousOppositeEdge = this._adjacencyList.get(edge.vertexB);
-		if (previousOppositeEdge) {
+		const vertexBList = this._adjacencyList.get(edge.vertexB) ?? [];
+		const newVertexBList = vertexBList.filter((x) => !x.equals(edge.vertexA));
+		if(newVertexBList.length > 0) {
 			this._adjacencyList.set(
 				edge.vertexB,
-				previousOppositeEdge.filter((x) => !x.equals(edge.vertexA)),
+				newVertexBList,
+			);
+		} else {
+			this._adjacencyList.delete(
+				edge.vertexB
 			);
 		}
 	}
