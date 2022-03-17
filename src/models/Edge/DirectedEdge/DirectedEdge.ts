@@ -25,7 +25,7 @@ export class DirectedEdge<V extends Vertex> extends Edge<V> {
     }
 
     protected isEqualDirectedEdge(other: DirectedEdge<V>): boolean {
-        if (!other.isDirected()) return false;
+        if (this.isDirected() !== other.isDirected()) return false;
 
         return this.vertexA.equals(other.vertexA) && this.vertexB.equals(other.vertexB);
     }

@@ -25,9 +25,6 @@ const expectInitialStateShared = () => {
     // list of vertices
     expectVerticesListsAreEqual(generateNamedVertices(vertices), graph.getListOfVertices());
 
-    // list of edges
-    expectEdgeListsAreEqual(generateDirectedEdgesWithNameVertex(edges), graph.getListOfEdges());
-
     // adjacency list
     const adjacencyList = graph.getAdjacencyList();
     expectVerticesListsAreEqual(
@@ -48,6 +45,9 @@ const expectInitialStateShared = () => {
 const expectInitialStateDirected = () => {
     expectInitialStateShared();
 
+    // list of edges
+    expectEdgeListsAreEqual(generateDirectedEdgesWithNameVertex(edges), graph.getListOfEdges());
+
     // (sparse) adjacency matrix
     for (const vertexA of generateNamedVertices(vertices)) {
         for (const vertexB of generateNamedVertices(vertices)) {
@@ -62,6 +62,9 @@ const expectInitialStateDirected = () => {
 
 const expectInitialStateUndirected = () => {
     expectInitialStateShared();
+
+    // list of edges
+    expectEdgeListsAreEqual(generateUndirectedEdgesWithNameVertex(edges), graph.getListOfEdges());
 
     // (sparse) adjacency matrix
     for (const vertexA of generateNamedVertices(vertices)) {

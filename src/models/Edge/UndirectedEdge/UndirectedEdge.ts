@@ -17,8 +17,10 @@ export class UndirectedEdge<V extends Vertex> extends Edge<V> {
     }
 
     protected isEqualUndirectedEdge(other: UndirectedEdge<V>): boolean {
+        if (this.isDirected() !== other.isDirected()) return false;
+
         return (
-            (!other.isDirected() && this.vertexA.equals(other.vertexA) && this.vertexB.equals(other.vertexB)) ||
+            (this.vertexA.equals(other.vertexA) && this.vertexB.equals(other.vertexB)) ||
             (this.vertexA.equals(other.vertexB) && this.vertexB.equals(other.vertexA))
         );
     }
