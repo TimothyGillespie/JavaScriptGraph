@@ -1,5 +1,12 @@
 import { Graph } from '../Graph';
-import { DirectedEdge, Edge, edgeEqual, UndirectedEdge } from '../../Edge';
+import {
+    DirectedEdge,
+    Edge,
+    edgeEqual,
+    UndirectedEdge,
+    WeightedDirectedEdge,
+    WeightedUndirectedEdge,
+} from '../../Edge';
 import {
     generateDirectedEdgesWithNameVertex,
     generateNamedVertices,
@@ -410,6 +417,152 @@ describe('graph.deleteEdge(e)', () => {
                     }
                 }
             );
+        });
+    });
+
+    let edgesInstances: Edge<NamedVertex>[] = [];
+    const a = new NamedVertex('a');
+    const b = new NamedVertex('b');
+
+    describe('Reproduce #24', () => {
+        describe('2x WeightedUndirectedEdges (not equal)', () => {
+            beforeEach(() => {
+                edgesInstances = [new WeightedUndirectedEdge(a, b, 1), new WeightedUndirectedEdge(a, b, 2)];
+
+                graph.addEdge(...edgesInstances);
+            });
+
+            it('delete 1', () => {
+                graph.deleteEdge(edgesInstances[0]);
+
+                expect(graph.getAdjacencyMatrix().get(a, b)).toEqual(true);
+                expect(graph.getAdjacencyMatrix().get(b, a)).toEqual(true);
+
+                expect(graph.getAdjacencyList().getAdjacentVertices(a)).toEqual([b]);
+                expect(graph.getAdjacencyList().getAdjacentVertices(b)).toEqual([a]);
+            });
+
+            it('delete both', () => {
+                graph.deleteEdge(edgesInstances[0]);
+                graph.deleteEdge(edgesInstances[1]);
+
+                expect(graph.getAdjacencyMatrix().get(a, b)).toEqual(false);
+                expect(graph.getAdjacencyMatrix().get(b, a)).toEqual(false);
+
+                expect(graph.getAdjacencyList().getAdjacentVertices(a)).toEqual([]);
+                expect(graph.getAdjacencyList().getAdjacentVertices(b)).toEqual([]);
+            });
+        });
+
+        describe('2x WeightedUndirectedEdges (equal)', () => {
+            beforeEach(() => {
+                edgesInstances = [new WeightedUndirectedEdge(a, b, 3), new WeightedUndirectedEdge(a, b, 3)];
+
+                graph.addEdge(...edgesInstances);
+            });
+
+            it('delete 1', () => {
+                graph.deleteEdge(edgesInstances[0]);
+
+                expect(graph.getAdjacencyMatrix().get(a, b)).toEqual(false);
+                expect(graph.getAdjacencyMatrix().get(b, a)).toEqual(false);
+
+                expect(graph.getAdjacencyList().getAdjacentVertices(a)).toEqual([]);
+                expect(graph.getAdjacencyList().getAdjacentVertices(b)).toEqual([]);
+            });
+        });
+
+        describe('2x WeightedDirectedEdges (opposite direction, not equal)', () => {
+            beforeEach(() => {
+                edgesInstances = [new WeightedDirectedEdge(a, b, 1), new WeightedDirectedEdge(b, a, 2)];
+
+                graph.addEdge(...edgesInstances);
+            });
+
+            it('delete 1', () => {
+                graph.deleteEdge(edgesInstances[0]);
+
+                expect(graph.getAdjacencyMatrix().get(a, b)).toEqual(false);
+                expect(graph.getAdjacencyMatrix().get(b, a)).toEqual(true);
+
+                expect(graph.getAdjacencyList().getAdjacentVertices(a)).toEqual([b]);
+                expect(graph.getAdjacencyList().getAdjacentVertices(b)).toEqual([a]);
+            });
+
+            it('delete both', () => {
+                graph.deleteEdge(edgesInstances[0]);
+                graph.deleteEdge(edgesInstances[1]);
+
+                expect(graph.getAdjacencyMatrix().get(a, b)).toEqual(false);
+                expect(graph.getAdjacencyMatrix().get(b, a)).toEqual(false);
+
+                expect(graph.getAdjacencyList().getAdjacentVertices(a)).toEqual([]);
+                expect(graph.getAdjacencyList().getAdjacentVertices(b)).toEqual([]);
+            });
+        });
+
+        describe('1x WeightedDirectedEdges 1xDirectedEdge (same direction, not equal)', () => {
+            beforeEach(() => {
+                edgesInstances = [new WeightedDirectedEdge(a, b, 1), new DirectedEdge(a, b)];
+
+                graph.addEdge(...edgesInstances);
+            });
+
+            it('delete 1', () => {
+                expect(graph.getAdjacencyMatrix().get(a, b)).toEqual(true);
+                expect(graph.getAdjacencyMatrix().get(b, a)).toEqual(false);
+
+                graph.deleteEdge(edgesInstances[0]);
+
+                expect(graph.getAdjacencyMatrix().get(a, b)).toEqual(true);
+                expect(graph.getAdjacencyMatrix().get(b, a)).toEqual(false);
+
+                expect(graph.getAdjacencyList().getAdjacentVertices(a)).toEqual([b]);
+                expect(graph.getAdjacencyList().getAdjacentVertices(b)).toEqual([a]);
+            });
+
+            it('delete both', () => {
+                graph.deleteEdge(edgesInstances[0]);
+                graph.deleteEdge(edgesInstances[1]);
+
+                expect(graph.getAdjacencyMatrix().get(a, b)).toEqual(false);
+                expect(graph.getAdjacencyMatrix().get(b, a)).toEqual(false);
+
+                expect(graph.getAdjacencyList().getAdjacentVertices(a)).toEqual([]);
+                expect(graph.getAdjacencyList().getAdjacentVertices(b)).toEqual([]);
+            });
+        });
+
+        describe('1x WeightedDirectedEdges 1xDirectedEdge (opposite direction, not equal)', () => {
+            beforeEach(() => {
+                edgesInstances = [new WeightedDirectedEdge(a, b, 1), new DirectedEdge(b, a)];
+
+                graph.addEdge(...edgesInstances);
+            });
+
+            it('delete 1', () => {
+                expect(graph.getAdjacencyMatrix().get(a, b)).toEqual(true);
+                expect(graph.getAdjacencyMatrix().get(b, a)).toEqual(true);
+
+                graph.deleteEdge(edgesInstances[0]);
+
+                expect(graph.getAdjacencyMatrix().get(a, b)).toEqual(false);
+                expect(graph.getAdjacencyMatrix().get(b, a)).toEqual(true);
+
+                expect(graph.getAdjacencyList().getAdjacentVertices(a)).toEqual([b]);
+                expect(graph.getAdjacencyList().getAdjacentVertices(b)).toEqual([a]);
+            });
+
+            it('delete both', () => {
+                graph.deleteEdge(edgesInstances[0]);
+                graph.deleteEdge(edgesInstances[1]);
+
+                expect(graph.getAdjacencyMatrix().get(a, b)).toEqual(false);
+                expect(graph.getAdjacencyMatrix().get(b, a)).toEqual(false);
+
+                expect(graph.getAdjacencyList().getAdjacentVertices(a)).toEqual([]);
+                expect(graph.getAdjacencyList().getAdjacentVertices(b)).toEqual([]);
+            });
         });
     });
 });
