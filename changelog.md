@@ -2,7 +2,7 @@
 
 ## New Features
 
--   Add weighted edges
+-   Add weighted edges #19
 
 ## Bug Fixes
 
