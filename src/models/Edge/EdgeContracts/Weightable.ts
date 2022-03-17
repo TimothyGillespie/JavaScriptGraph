@@ -1,0 +1,3 @@
+interface Weightable {
+    getWeight(): number;
+}

@@ -1,6 +1,6 @@
 import { NamedVertex } from '../../Vertex/NamedVertex/NamedVertex';
 import { Graph } from '../Graph';
-import { Edge } from '../../Edge/Edge/Edge';
+import { Edge } from '../../Edge/EdgeContracts/Edge';
 import { DirectedEdge } from '../../Edge/DirectedEdge/DirectedEdge';
 import { expectVerticesListsAreEqual } from '../../../../testUtil/expectVerticesListsAreEqual';
 import { UndirectedEdge } from '../../Edge/UndirectedEdge/UndirectedEdge';
