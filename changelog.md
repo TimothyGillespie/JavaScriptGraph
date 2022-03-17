@@ -4,7 +4,7 @@
 
 -   Add weighted edges
 
-# Bug Fixes
+## Bug Fixes
 
 -   AdjacencyList now updates (never changed prior).
 -   g.getEdges(a, b) now correctly works with the isDirected() method (the logic was the inverse of the intention)
