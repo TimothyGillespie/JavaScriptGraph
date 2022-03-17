@@ -2,11 +2,13 @@
 
 ## New Features
 
-- Add weighted edges
+-   Add weighted edges
 
 # Bug Fixes
 
--   Fixed a bug in AdjacencyList where it was never updated.
+-   AdjacencyList now updates (never changed prior).
+-   g.getEdges(a, b) now correctly works with the isDirected() method (the logic was the inverse of the intention)
+-   g.deleteEdge(...e) does no longer update ajacency matrix and adjacencyList wrongly if another edge keeps an adjacency alive #24
 
 # Version 0.4.x
 
