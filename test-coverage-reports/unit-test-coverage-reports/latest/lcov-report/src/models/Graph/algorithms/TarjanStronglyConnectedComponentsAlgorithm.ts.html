@@ -131,9 +131,9 @@
 <a name='L66'></a><a href='#L66'>66</a>
 <a name='L67'></a><a href='#L67'>67</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -200,66 +200,66 @@ import { Vertex } from '../../Vertex/Vertex/Vertex';
 import { MutableHashMap } from '@tgillespie/hash-data-structures';
 &nbsp;
 export class TarjanStronglyConnectedComponentsAlgorithm&lt;V extends Vertex&gt; {
-	private constructor(graph: Graph&lt;V, any&gt;) {
-		this.graph = graph;
+    private constructor(graph: Graph&lt;V, any&gt;) {
+        this.graph = graph;
 &nbsp;
-		this.discreteTime = 0;
-		this.stack = [];
-		this.lowMap = new MutableHashMap();
-		this.discMap = new MutableHashMap();
+        this.discreteTime = 0;
+        this.stack = [];
+        this.lowMap = new MutableHashMap();
+        this.discMap = new MutableHashMap();
 &nbsp;
-		this.result = [];
-	}
+        this.result = [];
+    }
 &nbsp;
-	graph: Graph&lt;V, any&gt;;
+    graph: Graph&lt;V, any&gt;;
 &nbsp;
-	discreteTime: number;
-	stack: V[];
-	lowMap: MutableHashMap&lt;V, number&gt;;
-	discMap: MutableHashMap&lt;V, number&gt;;
+    discreteTime: number;
+    stack: V[];
+    lowMap: MutableHashMap&lt;V, number&gt;;
+    discMap: MutableHashMap&lt;V, number&gt;;
 &nbsp;
-	result: V[][];
+    result: V[][];
 &nbsp;
-	static getStronglyConnectedComponentFor&lt;V extends Vertex&gt;(graph: Graph&lt;V, any&gt;): V[][] {
-		const algo = new TarjanStronglyConnectedComponentsAlgorithm(graph);
+    static getStronglyConnectedComponentFor&lt;V extends Vertex&gt;(graph: Graph&lt;V, any&gt;): V[][] {
+        const algo = new TarjanStronglyConnectedComponentsAlgorithm(graph);
 &nbsp;
-		algo.graph.getListOfVertices().forEach((singleVertex) =&gt; {
-			if (!algo.discMap.has(singleVertex)) algo.dfsUtil(singleVertex);
-		});
+        algo.graph.getListOfVertices().forEach((singleVertex) =&gt; {
+            if (!algo.discMap.has(singleVertex)) algo.dfsUtil(singleVertex);
+        });
 &nbsp;
-		return algo.result;
-	}
+        return algo.result;
+    }
 &nbsp;
-	private dfsUtil(currentVertex: V) {
-		this.discMap.set(currentVertex, this.discreteTime);
-		this.lowMap.set(currentVertex, this.discreteTime);
-		this.discreteTime += 1;
-		this.stack.push(currentVertex);
-		this.graph.getChildVertices(currentVertex).forEach((childVertex) =&gt; {
-			if (!this.discMap.has(childVertex)) {
-				this.dfsUtil(childVertex);
-				this.lowMap.set(
-					currentVertex,
-					Math.min(this.lowMap.get(currentVertex) ?? <span class="branch-1 cbranch-no" title="branch not covered" >-1,</span> this.lowMap.get(childVertex) ?? <span class="branch-1 cbranch-no" title="branch not covered" >-1)</span>,
-				);
-			} else if (this.stack.find((stackVertex) =&gt; stackVertex.equals(childVertex)) !== undefined) {
-				this.lowMap.set(
-					currentVertex,
-					Math.min(this.lowMap.get(currentVertex) ?? <span class="branch-1 cbranch-no" title="branch not covered" >-1,</span> this.discMap.get(childVertex) ?? <span class="branch-1 cbranch-no" title="branch not covered" >-1)</span>,
-				);
-			}
-		});
+    private dfsUtil(currentVertex: V) {
+        this.discMap.set(currentVertex, this.discreteTime);
+        this.lowMap.set(currentVertex, this.discreteTime);
+        this.discreteTime += 1;
+        this.stack.push(currentVertex);
+        this.graph.getChildVertices(currentVertex).forEach((childVertex) =&gt; {
+            if (!this.discMap.has(childVertex)) {
+                this.dfsUtil(childVertex);
+                this.lowMap.set(
+                    currentVertex,
+                    Math.min(this.lowMap.get(currentVertex) ?? <span class="branch-1 cbranch-no" title="branch not covered" >-1,</span> this.lowMap.get(childVertex) ?? <span class="branch-1 cbranch-no" title="branch not covered" >-1)</span>
+                );
+            } else if (this.stack.find((stackVertex) =&gt; stackVertex.equals(childVertex)) !== undefined) {
+                this.lowMap.set(
+                    currentVertex,
+                    Math.min(this.lowMap.get(currentVertex) ?? <span class="branch-1 cbranch-no" title="branch not covered" >-1,</span> this.discMap.get(childVertex) ?? <span class="branch-1 cbranch-no" title="branch not covered" >-1)</span>
+                );
+            }
+        });
 &nbsp;
-		if (this.lowMap.get(currentVertex) === this.discMap.get(currentVertex)) {
-			const currentComponent: V[] = [];
-			let otherVertex: V;
-			do {
-				otherVertex = this.stack.pop()!;
-				currentComponent.push(otherVertex);
-			} while (!currentVertex.equals(otherVertex));
-			this.result.push(currentComponent);
-		}
-	}
+        if (this.lowMap.get(currentVertex) === this.discMap.get(currentVertex)) {
+            const currentComponent: V[] = [];
+            let otherVertex: V;
+            do {
+                otherVertex = this.stack.pop()!;
+                currentComponent.push(otherVertex);
+            } while (!currentVertex.equals(otherVertex));
+            this.result.push(currentComponent);
+        }
+    }
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -268,7 +268,7 @@ export class TarjanStronglyConnectedComponentsAlgorithm&lt;V extends Vertex&gt; 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Fri Feb 18 2022 23:28:07 GMT+0000 (Coordinated Universal Time)
+                at Thu Mar 17 2022 22:49:43 GMT+0000 (Coordinated Universal Time)
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
