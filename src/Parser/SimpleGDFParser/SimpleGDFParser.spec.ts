@@ -10,42 +10,42 @@ import { generateDirectedEdgesWithNameVertex } from '../../../testUtil/generatio
 let g: Graph<NamedVertex, DirectedEdge<NamedVertex>>;
 
 describe('SimpleGDFParser', () => {
-	it('Loads peterson graph', () => {
-		new SimpleGDFParser().parse(petersonGraph);
-		expect(true).toEqual(true);
-	});
+    it('Loads peterson graph', () => {
+        new SimpleGDFParser().parse(petersonGraph);
+        expect(true).toEqual(true);
+    });
 
-	it('List of vertices are as expected', () => {
-		g = new SimpleGDFParser().parse(petersonGraph);
+    it('List of vertices are as expected', () => {
+        g = new SimpleGDFParser().parse(petersonGraph);
 
-		expectVerticesListsAreEqual(
-			g.getListOfVertices(),
-			['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'].map((symbol) => new NamedVertex(symbol)),
-		);
-	});
+        expectVerticesListsAreEqual(
+            g.getListOfVertices(),
+            ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'].map((symbol) => new NamedVertex(symbol))
+        );
+    });
 
-	it('List of edges are as expected', () => {
-		g = new SimpleGDFParser().parse(petersonGraph);
+    it('List of edges are as expected', () => {
+        g = new SimpleGDFParser().parse(petersonGraph);
 
-		const edgePairs: string[][] = [
-			['a', 'b'],
-			['b', 'c'],
-			['c', 'd'],
-			['d', 'e'],
-			['e', 'a'],
-			['a', 'f'],
-			['b', 'g'],
-			['c', 'h'],
-			['d', 'i'],
-			['e', 'j'],
-			['f', 'h'],
-			['h', 'j'],
-			['j', 'g'],
-			['g', 'i'],
-			['i', 'f'],
-		];
+        const edgePairs: string[][] = [
+            ['a', 'b'],
+            ['b', 'c'],
+            ['c', 'd'],
+            ['d', 'e'],
+            ['e', 'a'],
+            ['a', 'f'],
+            ['b', 'g'],
+            ['c', 'h'],
+            ['d', 'i'],
+            ['e', 'j'],
+            ['f', 'h'],
+            ['h', 'j'],
+            ['j', 'g'],
+            ['g', 'i'],
+            ['i', 'f'],
+        ];
 
-		const listOfEdges = generateDirectedEdgesWithNameVertex(edgePairs);
-		expectEdgeListsAreEqual(g.getListOfEdges(), listOfEdges);
-	});
+        const listOfEdges = generateDirectedEdgesWithNameVertex(edgePairs);
+        expectEdgeListsAreEqual(g.getListOfEdges(), listOfEdges);
+    });
 });

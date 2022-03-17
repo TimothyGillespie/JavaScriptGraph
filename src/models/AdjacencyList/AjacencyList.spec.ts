@@ -1,6 +1,6 @@
-import { NamedVertex } from "../Vertex/NamedVertex/NamedVertex";
-import { AdjacencyList } from "./AdjacencyList";
-import { DirectedEdge, UndirectedEdge } from "../Edge";
+import { NamedVertex } from '../Vertex/NamedVertex/NamedVertex';
+import { AdjacencyList } from './AdjacencyList';
+import { DirectedEdge, UndirectedEdge } from '../Edge';
 
 const a = new NamedVertex('a');
 const b = new NamedVertex('b');
@@ -52,46 +52,46 @@ describe('AdjacencyList', () => {
 
     it('adding adjacency and then a vertex it will make the same vertices in the same order not adjacent', () => {
         adjList.addAdjacency(a, b);
-        adjList.deleteVertex(a)
+        adjList.deleteVertex(a);
         expect(adjList.areAdjacent(a, b)).toBe(false);
     });
 
     it('adding adjacency and then deleting a vertex it will make the same vertices in the reverse order not adjacent', () => {
         adjList.addAdjacency(a, b);
-        adjList.deleteVertex(a)
+        adjList.deleteVertex(a);
         expect(adjList.areAdjacent(b, a)).toBe(false);
     });
 
     it('adding an adjacency twice and then deleting a vertex it will make the same vertices in the same order not adjacent', () => {
         adjList.addAdjacency(a, b);
         adjList.addAdjacency(a, b);
-        adjList.deleteVertex(a)
+        adjList.deleteVertex(a);
         expect(adjList.areAdjacent(a, b)).toBe(false);
     });
 
     it('adding adjacency and then deleting a vertex twice it will make the same vertices in the reverse order not adjacent', () => {
         adjList.addAdjacency(a, b);
         adjList.addAdjacency(a, b);
-        adjList.deleteVertex(a)
-        adjList.deleteVertex(a)
+        adjList.deleteVertex(a);
+        adjList.deleteVertex(a);
         expect(adjList.areAdjacent(b, a)).toBe(false);
     });
 
     it('adding adjacency and then deleting a vertex twice it will make the same vertices in the same order not adjacent', () => {
         adjList.addAdjacency(a, b);
-        adjList.deleteVertex(a)
-        adjList.deleteVertex(a)
+        adjList.deleteVertex(a);
+        adjList.deleteVertex(a);
         expect(adjList.areAdjacent(a, b)).toBe(false);
     });
 
     it('deleting a not listed vertex works', () => {
-        adjList.deleteVertex(a)
+        adjList.deleteVertex(a);
         expect(adjList.areAdjacent(a, b)).toBe(false);
     });
 
     it('deleting a not listed vertex does not affect other adjacency', () => {
         adjList.addAdjacency(c, d);
-        adjList.deleteVertex(a)
+        adjList.deleteVertex(a);
         expect(adjList.areAdjacent(c, d)).toBe(true);
     });
 
@@ -99,7 +99,7 @@ describe('AdjacencyList', () => {
         adjList.addAdjacency(a, b);
         adjList.addAdjacency(b, c);
         adjList.addAdjacency(c, d);
-        adjList.deleteVertex(a)
+        adjList.deleteVertex(a);
         expect(adjList.areAdjacent(a, b)).toBe(false);
         expect(adjList.areAdjacent(b, c)).toBe(true);
         expect(adjList.areAdjacent(c, d)).toBe(true);
@@ -107,7 +107,7 @@ describe('AdjacencyList', () => {
 
     it('deleting a directed edge deletes the corresponding adjacency', () => {
         adjList.addAdjacency(a, b);
-        adjList.deleteEdge(new DirectedEdge(a, b))
+        adjList.deleteEdge(new DirectedEdge(a, b));
         expect(adjList.areAdjacent(a, b)).toBe(false);
     });
 
@@ -116,7 +116,7 @@ describe('AdjacencyList', () => {
         adjList.addAdjacency(a, c);
         adjList.addAdjacency(b, c);
         adjList.addAdjacency(c, d);
-        adjList.deleteEdge(new DirectedEdge(a, b))
+        adjList.deleteEdge(new DirectedEdge(a, b));
         expect(adjList.areAdjacent(a, c)).toBe(true);
         expect(adjList.areAdjacent(b, c)).toBe(true);
         expect(adjList.areAdjacent(c, d)).toBe(true);
@@ -124,7 +124,7 @@ describe('AdjacencyList', () => {
 
     it('deleting an undirected edge deletes the corresponding adjacency', () => {
         adjList.addAdjacency(a, b);
-        adjList.deleteEdge(new UndirectedEdge(a, b))
+        adjList.deleteEdge(new UndirectedEdge(a, b));
         expect(adjList.areAdjacent(a, b)).toBe(false);
     });
 
@@ -132,7 +132,7 @@ describe('AdjacencyList', () => {
         adjList.addAdjacency(a, c);
         adjList.addAdjacency(b, c);
         adjList.addAdjacency(c, d);
-        adjList.deleteEdge(new UndirectedEdge(a, b))
+        adjList.deleteEdge(new UndirectedEdge(a, b));
         expect(adjList.areAdjacent(a, b)).toBe(false);
         expect(adjList.areAdjacent(a, c)).toBe(true);
         expect(adjList.areAdjacent(b, c)).toBe(true);
@@ -144,10 +144,9 @@ describe('AdjacencyList', () => {
         adjList.addAdjacency(a, c);
         adjList.addAdjacency(b, c);
         adjList.addAdjacency(c, d);
-        adjList.deleteEdge(new DirectedEdge(a, b))
+        adjList.deleteEdge(new DirectedEdge(a, b));
         expect(adjList.areAdjacent(a, c)).toBe(true);
         expect(adjList.areAdjacent(b, c)).toBe(true);
         expect(adjList.areAdjacent(c, d)).toBe(true);
     });
-
 });
