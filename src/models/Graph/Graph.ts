@@ -246,21 +246,21 @@ export class Graph<V extends Vertex, E extends Edge<V>> {
         });
     }
 
-	/**
-	 * Retrieves edges in the graph with the given source and target vertex. Undirected edges disregard source and target check both orders.
-	 *
-	 * @param vertexA The source vertex.
-	 * @param vertexB The target vertex.
-	 */
-	getEdges(vertexA: V, vertexB: V): E[] {
-		return this.getListOfEdges().filter(
-			(maybeWantedEdge) =>
-				(maybeWantedEdge.vertexA.equals(vertexA) && maybeWantedEdge.vertexB.equals(vertexB)) ||
-				(maybeWantedEdge.isDirected() &&
-					maybeWantedEdge.vertexA.equals(vertexB) &&
-					maybeWantedEdge.vertexB.equals(vertexA)),
-		);
-	}
+    /**
+     * Retrieves edges in the graph with the given source and target vertex. Undirected edges disregard source and target check both orders.
+     *
+     * @param vertexA The source vertex.
+     * @param vertexB The target vertex.
+     */
+    getEdges(vertexA: V, vertexB: V): E[] {
+        return this.getListOfEdges().filter(
+            (maybeWantedEdge) =>
+                (maybeWantedEdge.vertexA.equals(vertexA) && maybeWantedEdge.vertexB.equals(vertexB)) ||
+                (!maybeWantedEdge.isDirected() &&
+                    maybeWantedEdge.vertexA.equals(vertexB) &&
+                    maybeWantedEdge.vertexB.equals(vertexA))
+        );
+    }
 
     /**
      * Transposes all edges of the Graph by calling the transpose method on all edges. This inverts source and target vertex.
