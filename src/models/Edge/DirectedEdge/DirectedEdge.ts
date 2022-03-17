@@ -1,4 +1,4 @@
-import { Edge } from '../Edge/Edge';
+import { Edge } from '../EdgeContracts/Edge';
 import { Vertex } from '../../Vertex/Vertex/Vertex';
 import { Hashable } from '@tgillespie/hash-data-structures';
 
