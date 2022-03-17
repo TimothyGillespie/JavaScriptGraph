@@ -1,8 +1,12 @@
 # Version 0.5.0
 
+## New Features
+
+- Add weighted edges
+
 # Bug Fixes
 
--   Fixed a bug in AdjacencyList where it was never updated when vertices where put as adjacent.
+-   Fixed a bug in AdjacencyList where it was never updated.
 
 # Version 0.4.x
 
