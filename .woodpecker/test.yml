@@ -1,4 +1,4 @@
-pipeline:
+matrix:
   NODE_VERSION:
     - 18-alpine
     - 17-alpine
@@ -9,7 +9,9 @@ pipeline:
     - 12-alpine
     - 11-alpine
     - 10-alpine
-  build:
+
+pipeline:
+  test:
     image: node:${NODE_VERSION}
     commands:
       - npm ci
