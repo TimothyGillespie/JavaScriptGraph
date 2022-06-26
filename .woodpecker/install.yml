@@ -1,0 +1,5 @@
+pipeline:
+  install:
+    image: node:16-alpine
+    commands:
+      - npm ci
